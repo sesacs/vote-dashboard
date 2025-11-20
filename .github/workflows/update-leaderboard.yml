@@ -5,6 +5,9 @@ on:
     - cron: "0 * * * *" # 매시간 캐시 갱신 시도
   workflow_dispatch:
 
+permissions:
+  contents: write # data/*를 커밋/푸시하려면 write 권한 필요
+
 jobs:
   fetch:
     runs-on: ubuntu-latest
