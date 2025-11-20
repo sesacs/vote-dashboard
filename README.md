@@ -9,3 +9,16 @@
 - 위 미리보기 링크를 그대로 공유하면 브라우저에서 바로 렌더링됩니다.
 - `votes.html`은 GitHub에 저장된 사전 계산 스냅샷(`data/summary.json`)만 읽으므로 CORS 문제 없이 동작합니다.
 - 스냅샷은 `.github/workflows/update-leaderboard.yml`가 매시간 HTML을 받아 `data/leaderboard.html`과 `data/summary.json`을 갱신하려고 시도합니다. 필요 시 `example.py`나 수동 다운로드로 `data/leaderboard.html`을 업데이트한 뒤 `python3 -c "..."`로 `data/summary.json`을 재생성하고 `git push`하면 즉시 반영됩니다.
+
+작동 흐름
+```mermaid
+flowchart TD
+  A[GitHub Actions cron<br/>(매 정시)] --> B[curl 리더보드 HTML<br/>data/leaderboard.html]
+  B --> C[파싱 후 요약 JSON 생성<br/>data/summary.json]
+  C --> D{변경 있음?}
+  D -- yes --> E[commit & push]
+  D -- no --> F[skip]
+  E --> G[raw.githubusercontent.com 노출]
+  F --> G
+  G --> H[votes.html (htmlpreview)<br/>summary.json fetch & 렌더]
+```
