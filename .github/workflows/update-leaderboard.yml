@@ -28,12 +28,17 @@ jobs:
           curl -fL --retry 4 --retry-delay 3 -H "User-Agent: ${UA}" "$URL_LEADER" -o data/leaderboard.html
           wc -c data/leaderboard.html
 
-      - name: Download codeshare list
+      - name: Download codeshare list (multiple pages)
         run: |
           set -euo pipefail
           mkdir -p data
-          curl -fL --retry 4 --retry-delay 3 -H "User-Agent: ${UA}" "$URL_CODESHARE" -o data/codeshare.html
-          wc -c data/codeshare.html
+          for page in 1 2 3 4 5; do
+            url="${URL_CODESHARE}?page=${page}&dtype=recent"
+            out="data/codeshare-${page}.html"
+            echo "Downloading $url -> $out"
+            curl -fL --retry 4 --retry-delay 3 -H "User-Agent: ${UA}" "$url" -o "$out"
+            wc -c "$out"
+          done
 
       - name: Build summary JSON
         run: |
@@ -43,7 +48,7 @@ jobs:
 
           root = pathlib.Path("data")
           leader_html = root.joinpath("leaderboard.html").read_text()
-          codeshare_html = root.joinpath("codeshare.html").read_text()
+          codeshare_files = sorted(root.glob("codeshare-*.html"))
 
           # 1) votes from leaderboard
           pattern = re.compile(r'<li class="vote[^>]*>\s*<span[^>]*>\s*([\d,]+)\s*</span>.*?<li class="date', re.S)
@@ -51,8 +56,19 @@ jobs:
 
           # 2) codeshare titles and views from __NUXT__ payload (title:"...", view_cnt:123)
           post_pattern = re.compile(r'title:\"([^\"]+?)\".*?view_cnt:(\d+)', re.S)
-          posts = [{"title": htmllib.unescape(t.strip()), "views": int(v)} for t, v in post_pattern.findall(codeshare_html)]
-          posts_sorted = sorted(posts, key=lambda x: x["views"])  # 오름차순
+          posts = []
+          for f in codeshare_files:
+            html_txt = f.read_text()
+            posts.extend({"title": htmllib.unescape(t.strip()), "views": int(v)} for t, v in post_pattern.findall(html_txt))
+
+          # dedupe by title (keep min views)
+          dedup = {}
+          for p in posts:
+            if p["title"] not in dedup or p["views"] < dedup[p["title"]]["views"]:
+              dedup[p["title"]] = p
+          posts_unique = list(dedup.values())
+
+          posts_sorted = sorted(posts_unique, key=lambda x: x["views"])  # 오름차순
           low_pool = posts_sorted[:30] if posts_sorted else []  # 하위 30개
           sample_base = low_pool[:15] if len(low_pool) > 15 else low_pool  # 너무 상위가 섞이지 않게 하위 15개까지만 샘플링
           sample_size = min(5, len(sample_base))
@@ -69,7 +85,7 @@ jobs:
           path = root.joinpath("summary.json")
           path.write_text(json.dumps(data, ensure_ascii=False, indent=2))
           print(f"votes: {len(votes)} items, sum {sum(votes)}")
-          print(f"codeshare posts: {len(posts)}, sample size: {len(low_view_sample)}")
+          print(f"codeshare posts(raw): {len(posts)}, unique: {len(posts_unique)}, sample size: {len(low_view_sample)}")
           print(f"low sample: {low_view_sample}")
           PY
 
