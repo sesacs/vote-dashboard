@@ -287,37 +287,18 @@
     function extractVotesFromHTML(htmlText) {
       const parser = new DOMParser();
       const doc = parser.parseFromString(htmlText, "text/html");
-      const body = doc.body;
-      if (!body) return { voteValues: [], totalVotes: 0 };
-
-      const datePattern = /(하루 전|\d+일 전|\d+시간 전|\d+분 전|\d+주 전|\d+달 전|\d+년 전)/;
-      const walker = doc.createTreeWalker(body, NodeFilter.SHOW_TEXT, {
-        acceptNode(node) {
-          return datePattern.test(node.nodeValue) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
-        },
-      });
-
-      let node;
       const voteValues = [];
       let totalVotes = 0;
 
-      while ((node = walker.nextNode())) {
-        const parent = node.parentNode;
-        if (!parent) continue;
-
-        let prev = parent.previousSibling;
-        while (prev && prev.nodeType === Node.TEXT_NODE && prev.nodeValue.trim() === "") {
-          prev = prev.previousSibling;
-        }
-        if (!prev) continue;
-
-        const text = prev.textContent !== undefined ? prev.textContent.trim() : String(prev).trim();
-        if (/^\d+$/.test(text)) {
-          const votes = Number(text);
-          voteValues.push(votes);
-          totalVotes += votes;
-        }
-      }
+      doc.querySelectorAll("li.date").forEach((dateLi) => {
+        const voteLi = dateLi.previousElementSibling;
+        if (!voteLi) return;
+        const text = voteLi.textContent.trim();
+        const numeric = Number(text);
+        if (!Number.isFinite(numeric)) return;
+        voteValues.push(numeric);
+        totalVotes += numeric;
+      });
 
       return { voteValues, totalVotes };
     }
