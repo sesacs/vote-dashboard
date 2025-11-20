@@ -221,6 +221,11 @@
   </main>
   <script>
     const URL = "https://dacon.io/competitions/official/236624/leaderboard";
+    const PROXY_URLS = [
+      URL,
+      // CORS 우회를 위한 프록시. 순차로 시도한다.
+      "https://cors.isomorphic-git.org/https://dacon.io/competitions/official/236624/leaderboard",
+    ];
     const TOTAL_TEAMS = 182;
     const VOTES_PER_TEAM_LEADER = 30;
     const MAX_SAMPLE = 10;
@@ -320,6 +325,22 @@
       return { voteValues, totalVotes };
     }
 
+    async function fetchWithFallback(urls) {
+      let lastError;
+      for (const target of urls) {
+        try {
+          const resp = await fetch(target, { cache: "no-store" });
+          if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+          const html = await resp.text();
+          return html;
+        } catch (err) {
+          lastError = err;
+          console.warn("fetch failed, trying next target", target, err);
+        }
+      }
+      throw lastError || new Error("모든 요청 실패");
+    }
+
     async function calculate() {
       clearError();
       setStatus("리더보드 불러오는 중...", "info");
@@ -330,9 +351,7 @@
       els.teamCount.textContent = "-";
 
       try {
-        const resp = await fetch(URL, { cache: "no-store" });
-        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-        const html = await resp.text();
+        const html = await fetchWithFallback(PROXY_URLS);
         const result = extractVotesFromHTML(html);
 
         renderStats(result);
