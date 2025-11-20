@@ -123,11 +123,10 @@
       color: #0d1021;
       font-weight: 700;
       text-align: left;
-      line-height: 1.4;
+      line-height: 1.45;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      white-space: normal;
+      word-break: keep-all;
     }
     .meta {
       margin-top: 12px;
@@ -261,8 +260,8 @@
       }
       posts.slice(0, MAX_SAMPLE).forEach((item) => {
         const li = document.createElement("li");
-        li.textContent = item.title;
-        li.title = item.title;
+        li.textContent = `${item.title} · 조회수 ${format(item.views)}`;
+        li.title = `${item.title} (조회수 ${format(item.views)})`;
         els.sample.appendChild(li);
       });
     }
