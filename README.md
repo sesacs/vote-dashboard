@@ -10,7 +10,8 @@ GitHub Pages 수준의 가벼운 배포로, 해커톤 참가자들이 서로의 
 - 작년 경험을 바탕으로 빠르게 공유할 수 있도록 GitHub.io 방식으로 배포했습니다.
 
 ## 바로 보기
-- 링크: https://htmlpreview.github.io/?https://raw.githubusercontent.com/sesacs/vote-dashboard/main/votes.html
+- 링크: https://htmlpreview.github.io/?https://raw.githubusercontent.com/sesacs/vote-dashboard/main/votes.html?v=20250204
+  - htmlpreview가 캐싱할 때가 있어, `?v=...` 파라미터를 바꿔주면 최신 파일을 강제로 불러옵니다.
 - 원본 html 파일: https://raw.githubusercontent.com/sesacs/vote-dashboard/main/votes.html
 
 ## 특징
