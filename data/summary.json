@@ -185,5 +185,27 @@
     1
   ],
   "teamCount": 182,
-  "updatedAt": "2025-11-20T05:14:01.864530Z"
+  "updatedAt": "2025-11-20T05:39:58.900589Z",
+  "lowViewSample": [
+    {
+      "title": "[베트맨] bat",
+      "views": 103
+    },
+    {
+      "title": "[소비게이터] Olla",
+      "views": 122
+    },
+    {
+      "title": "[LINX] 화장실 GO",
+      "views": 54
+    },
+    {
+      "title": "2025 새싹 해커톤 AI 서비스 기획서 배통통팀",
+      "views": 96
+    },
+    {
+      "title": "GemOphiaLab _ 퐁당",
+      "views": 115
+    }
+  ]
 }
