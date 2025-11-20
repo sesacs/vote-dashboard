@@ -20,6 +20,25 @@ jobs:
           mkdir -p data
           curl -L "https://dacon.io/competitions/official/236624/leaderboard" -o data/leaderboard.html
 
+      - name: Build summary JSON
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+import re, json, pathlib, datetime
+html = pathlib.Path("data/leaderboard.html").read_text()
+pattern = re.compile(r'<li class="vote[^>]*>\\s*<span[^>]*>\\s*([\\d,]+)\\s*</span>.*?<li class="date', re.S)
+votes = [int(x.replace(",", "")) for x in pattern.findall(html)]
+data = {
+    "totalVotes": sum(votes),
+    "voteValues": votes,
+    "teamCount": len(votes),
+    "updatedAt": datetime.datetime.utcnow().isoformat() + "Z",
+}
+path = pathlib.Path("data/summary.json")
+path.write_text(json.dumps(data, ensure_ascii=False, indent=2))
+print(f"found {len(votes)} votes, sum {sum(votes)}, wrote {path}")
+PY
+
       - name: Commit & push if changed
         env:
           GIT_AUTHOR_NAME: github-actions
@@ -29,7 +48,7 @@ jobs:
         run: |
           set -euo pipefail
           if git status --porcelain | grep .; then
-            git add data/leaderboard.html
+            git add data/leaderboard.html data/summary.json
             git commit -m "chore: refresh leaderboard snapshot"
             git push
           else

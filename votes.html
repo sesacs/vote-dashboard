@@ -214,15 +214,14 @@
           <li>–</li>
         </ul>
         <p class="meta" style="margin-top:14px;">
-          GitHub에 캐시된 리더보드 스냅샷(<code>data/leaderboard.html</code>)을 불러와 파싱합니다. 매시간 자동 갱신 워크플로우가 실행되며, 필요 시 수동으로 새로 고칠 수 있습니다.
+          GitHub에 저장된 사전 계산 스냅샷(<code>data/summary.json</code>)을 불러와 표시합니다. 매시간 자동 갱신 워크플로우가 실행되며, 필요 시 수동으로 새로 고칠 수 있습니다.
         </p>
       </article>
     </section>
   </main>
   <script>
     const URL = "https://dacon.io/competitions/official/236624/leaderboard";
-    const SNAPSHOT_URL = "https://raw.githubusercontent.com/sesacs/vote-dashboard/main/data/leaderboard.html";
-    // CORS 문제 없이 접근 가능한 캐시 스냅샷만 사용한다.
+    const SUMMARY_URL = "https://raw.githubusercontent.com/sesacs/vote-dashboard/main/data/summary.json";
     const TOTAL_TEAMS = 182;
     const VOTES_PER_TEAM_LEADER = 30;
     const MAX_SAMPLE = 10;
@@ -284,30 +283,11 @@
       els.error.textContent = "";
     }
 
-    function extractVotesFromHTML(htmlText) {
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(htmlText, "text/html");
-      const voteValues = [];
-      let totalVotes = 0;
-
-      doc.querySelectorAll("li.date").forEach((dateLi) => {
-        const voteLi = dateLi.previousElementSibling;
-        if (!voteLi) return;
-        const text = voteLi.textContent.trim();
-        const numeric = Number(text);
-        if (!Number.isFinite(numeric)) return;
-        voteValues.push(numeric);
-        totalVotes += numeric;
-      });
-
-      return { voteValues, totalVotes };
-    }
-
-    async function fetchSnapshot() {
-      const resp = await fetch(SNAPSHOT_URL, { cache: "no-store" });
+    async function fetchSummary() {
+      const resp = await fetch(SUMMARY_URL, { cache: "no-store" });
       if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-      const html = await resp.text();
-      return html;
+      const data = await resp.json();
+      return data;
     }
 
     async function calculate() {
@@ -320,10 +300,8 @@
       els.teamCount.textContent = "-";
 
       try {
-        const html = await fetchSnapshot();
-        const result = extractVotesFromHTML(html);
-
-        renderStats(result);
+        const summary = await fetchSummary();
+        renderStats(summary);
         setStatus("계산 완료", "success");
       } catch (err) {
         console.error(err);
