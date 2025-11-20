@@ -10,8 +10,8 @@ GitHub Pages 수준의 가벼운 배포로, 해커톤 참가자들이 서로의 
 - 작년 경험을 바탕으로 빠르게 공유할 수 있도록 GitHub.io 방식으로 배포했습니다.
 
 ## 바로 보기
-- 미리보기(iframe 우회): https://htmlpreview.github.io/?https://raw.githubusercontent.com/sesacs/vote-dashboard/main/votes.html
-- 원본 raw 파일: https://raw.githubusercontent.com/sesacs/vote-dashboard/main/votes.html
+- 링크: https://htmlpreview.github.io/?https://raw.githubusercontent.com/sesacs/vote-dashboard/main/votes.html
+- 원본 html 파일: https://raw.githubusercontent.com/sesacs/vote-dashboard/main/votes.html
 
 ## 특징
 - snapshot 기반: `data/summary.json`만 읽어 CORS 걱정 없이 동작합니다.
