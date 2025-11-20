@@ -112,11 +112,13 @@
       list-style: none;
       display: flex;
       flex-direction: column;
+      align-items: stretch;
       gap: 10px;
     }
     .list li {
       padding: 12px 14px;
       border-radius: 10px;
+      width: 100%;
       background: #f7f8fb;
       color: #0d1021;
       font-weight: 700;
@@ -256,7 +258,7 @@
       }
       posts.slice(0, MAX_SAMPLE).forEach((item) => {
         const li = document.createElement("li");
-        li.textContent = `${item.title} · 조회수 ${format(item.views)}`;
+        li.textContent = item.title;
         els.sample.appendChild(li);
       });
     }
