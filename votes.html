@@ -214,7 +214,7 @@
           <li>–</li>
         </ul>
         <p class="meta" style="margin-top:14px;">
-          브라우저에서 직접 <code>dacon.io</code> 페이지를 불러와 HTML을 파싱합니다. CORS 정책에 따라 차단될 수 있으며, 실패 시 Python 스크립트(example.py)처럼 로컬에서 실행하세요. 여러 프록시를 거친 뒤 모두 실패하면 레포의 캐시 스냅샷(<code>data/leaderboard.html</code>)을 사용합니다.
+          GitHub에 캐시된 리더보드 스냅샷(<code>data/leaderboard.html</code>)을 불러와 파싱합니다. 매시간 자동 갱신 워크플로우가 실행되며, 필요 시 수동으로 새로 고칠 수 있습니다.
         </p>
       </article>
     </section>
@@ -222,14 +222,7 @@
   <script>
     const URL = "https://dacon.io/competitions/official/236624/leaderboard";
     const SNAPSHOT_URL = "https://raw.githubusercontent.com/sesacs/vote-dashboard/main/data/leaderboard.html";
-    // CORS 우회를 위한 프록시. 첫 번째는 직접 요청이고, 이후 순차로 시도한다.
-    const PROXY_URLS = [
-      URL,
-      "https://cors.isomorphic-git.org/https://dacon.io/competitions/official/236624/leaderboard",
-      "https://api.allorigins.win/raw?url=https%3A%2F%2Fdacon.io%2Fcompetitions%2Fofficial%2F236624%2Fleaderboard",
-      "https://r.jina.ai/https://dacon.io/competitions/official/236624/leaderboard",
-      SNAPSHOT_URL, // 최종 캐시
-    ];
+    // CORS 문제 없이 접근 가능한 캐시 스냅샷만 사용한다.
     const TOTAL_TEAMS = 182;
     const VOTES_PER_TEAM_LEADER = 30;
     const MAX_SAMPLE = 10;
@@ -329,20 +322,11 @@
       return { voteValues, totalVotes };
     }
 
-    async function fetchWithFallback(urls) {
-      let lastError;
-      for (const target of urls) {
-        try {
-          const resp = await fetch(target, { cache: "no-store" });
-          if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-          const html = await resp.text();
-          return { html, source: target };
-        } catch (err) {
-          lastError = err;
-          console.warn("fetch failed, trying next target", target, err);
-        }
-      }
-      throw lastError || new Error("모든 요청 실패");
+    async function fetchSnapshot() {
+      const resp = await fetch(SNAPSHOT_URL, { cache: "no-store" });
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      const html = await resp.text();
+      return html;
     }
 
     async function calculate() {
@@ -355,15 +339,14 @@
       els.teamCount.textContent = "-";
 
       try {
-        const { html, source } = await fetchWithFallback(PROXY_URLS);
+        const html = await fetchSnapshot();
         const result = extractVotesFromHTML(html);
 
         renderStats(result);
-        const usedCache = source === SNAPSHOT_URL;
-        setStatus(usedCache ? "계산 완료 (캐시 사용)" : "계산 완료", "success");
+        setStatus("계산 완료", "success");
       } catch (err) {
         console.error(err);
-        renderError("브라우저에서 dacon.io 요청이 차단되었거나 네트워크 오류가 발생했습니다.");
+        renderError("스냅샷을 불러오지 못했습니다. 잠시 후 다시 시도하거나 캐시를 갱신하세요.");
       }
     }
 
