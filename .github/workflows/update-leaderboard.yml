@@ -180,17 +180,14 @@ jobs:
           posts_unique = list(dedup.values())
 
           posts_sorted = sorted(posts_unique, key=lambda x: x["views"])
-          low_pool = posts_sorted[:30] if posts_sorted else []
-          sample_base = low_pool[:15] if len(low_pool) > 15 else low_pool
-          sample_size = min(5, len(sample_base))
-          low_view_sample = random.sample(sample_base, sample_size) if sample_size else []
+          low_view_pool = posts_sorted[:30] if posts_sorted else []
 
           data = {
               "totalVotes": sum(votes),
               "voteValues": votes,
               "teamCount": len(votes),
               "updatedAt": datetime.datetime.utcnow().isoformat() + "Z",
-              "lowViewSample": low_view_sample,
+              "lowViewPool": low_view_pool,
               "allPosts": posts_unique,
           }
 

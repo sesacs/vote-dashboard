@@ -178,7 +178,7 @@
   <main>
     <header>
       <h1>데이콘 남은 투표 계산기</h1>
-      <p>example.py 로 계산하던 “참가팀 기준 남은 상호 투표 수”를 브라우저에서 바로 확인합니다. 리더보드 페이지의 시간 표기(몇 시간/분 전 등) 앞에 붙은 숫자 값을 모아 합산합니다.</p>
+      <p>example.py 로 계산하던 "참가팀 기준 남은 상호 투표 수"를 브라우저에서 바로 확인합니다. 리더보드 페이지의 시간 표기(몇 시간/분 전 등) 앞에 붙은 숫자 값을 모아 합산합니다.</p>
     </header>
     <section class="content">
       <article class="card" aria-live="polite">
@@ -219,6 +219,9 @@
           <li>–</li>
           <li>–</li>
         </ul>
+        <div class="actions">
+          <button id="shuffle-btn" type="button" class="secondary">🎲 다시 뽑기</button>
+        </div>
         <p class="meta" style="margin-top:14px;">
           GitHub에 저장된 사전 계산 스냅샷(<code>data/summary.json</code>)을 불러와 표시합니다. 30분마다 자동 갱신하며, 조회수 기준 하위 30개 팀 중 5개를 랜덤으로 보여줍니다.
         </p>
@@ -243,7 +246,10 @@
       error: document.getElementById("error"),
       runBtn: document.getElementById("run-btn"),
       openSrc: document.getElementById("open-src"),
+      shuffleBtn: document.getElementById("shuffle-btn"),
     };
+
+    let currentPool = [];
 
     const format = (n) => new Intl.NumberFormat("ko-KR").format(n);
 
@@ -252,13 +258,23 @@
       els.status.className = "status" + (kind === "error" ? " error" : kind === "success" ? " success" : "");
     }
 
+    function shuffleArray(array) {
+      const shuffled = [...array];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled;
+    }
+
     function renderSample(posts) {
       els.sample.innerHTML = "";
       if (!posts.length) {
         els.sample.innerHTML = "<li>값을 찾지 못했습니다</li>";
         return;
       }
-      posts.slice(0, MAX_SAMPLE).forEach((item) => {
+      const sample = shuffleArray(posts).slice(0, MAX_SAMPLE);
+      sample.forEach((item) => {
         const li = document.createElement("li");
         li.textContent = `${item.title} · 조회수 ${format(item.views)}`;
         li.title = `${item.title} (조회수 ${format(item.views)})`;
@@ -266,7 +282,7 @@
       });
     }
 
-    function renderStats({ totalVotes, voteValues, updatedAt, lowViewSample }) {
+    function renderStats({ totalVotes, voteValues, updatedAt, lowViewPool }) {
       const totalPossible = TOTAL_TEAMS * VOTES_PER_TEAM_LEADER;
       const remaining = totalPossible - totalVotes;
 
@@ -279,7 +295,8 @@
         : new Date().toLocaleString("ko-KR");
       els.updatedAt.textContent = `마지막 계산: ${timeText}`;
 
-      renderSample(lowViewSample || []);
+      currentPool = lowViewPool || [];
+      renderSample(currentPool);
     }
 
     function renderError(message) {
@@ -294,7 +311,7 @@
     }
 
     async function fetchSummary() {
-      const url = `${SUMMARY_URL}?t=${Date.now()}`; // cache-busting to avoid CDN/htmlpreview caches
+      const url = `${SUMMARY_URL}?t=${Date.now()}`;
       const resp = await fetch(url, { cache: "no-store" });
       if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
       const data = await resp.json();
@@ -322,6 +339,11 @@
 
     els.runBtn.addEventListener("click", calculate);
     els.openSrc.addEventListener("click", () => window.open(URL, "_blank", "noopener"));
+    els.shuffleBtn.addEventListener("click", () => {
+      if (currentPool.length > 0) {
+        renderSample(currentPool);
+      }
+    });
 
     calculate();
   </script>
