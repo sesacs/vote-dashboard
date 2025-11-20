@@ -11,6 +11,10 @@ permissions:
 jobs:
   fetch:
     runs-on: ubuntu-latest
+    env:
+      UA: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+      URL_LEADER: https://dacon.io/competitions/official/236624/leaderboard
+      URL_CODESHARE: https://dacon.io/competitions/official/236624/codeshare
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -21,13 +25,15 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p data
-          curl -L "https://dacon.io/competitions/official/236624/leaderboard" -o data/leaderboard.html
+          curl -fL --retry 4 --retry-delay 3 -H "User-Agent: ${UA}" "$URL_LEADER" -o data/leaderboard.html
+          wc -c data/leaderboard.html
 
       - name: Download codeshare list
         run: |
           set -euo pipefail
           mkdir -p data
-          curl -L "https://dacon.io/competitions/official/236624/codeshare" -o data/codeshare.html
+          curl -fL --retry 4 --retry-delay 3 -H "User-Agent: ${UA}" "$URL_CODESHARE" -o data/codeshare.html
+          wc -c data/codeshare.html
 
       - name: Build summary JSON
         run: |
@@ -64,6 +70,7 @@ path = root.joinpath("summary.json")
 path.write_text(json.dumps(data, ensure_ascii=False, indent=2))
 print(f"votes: {len(votes)} items, sum {sum(votes)}")
 print(f"codeshare posts: {len(posts)}, sample size: {len(low_view_sample)}")
+print(f"low sample: {low_view_sample}")
 PY
 
       - name: Commit & push if changed
