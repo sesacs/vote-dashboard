@@ -46,10 +46,11 @@ votes = [int(x.replace(",", "")) for x in pattern.findall(leader_html)]
 # 2) codeshare titles and views from __NUXT__ payload (title:"...", view_cnt:123)
 post_pattern = re.compile(r'title:\"([^\"]+?)\".*?view_cnt:(\d+)', re.S)
 posts = [{"title": htmllib.unescape(t.strip()), "views": int(v)} for t, v in post_pattern.findall(codeshare_html)]
-posts_sorted = sorted(posts, key=lambda x: x["views"])
-low_pool = posts_sorted[:30] if posts_sorted else []
-sample_size = min(5, len(low_pool))
-low_view_sample = random.sample(low_pool, sample_size) if sample_size else []
+posts_sorted = sorted(posts, key=lambda x: x["views"])  # 오름차순
+low_pool = posts_sorted[:30] if posts_sorted else []  # 하위 30개
+sample_base = low_pool[:15] if len(low_pool) > 15 else low_pool  # 너무 상위가 섞이지 않게 하위 15개까지만 샘플링
+sample_size = min(5, len(sample_base))
+low_view_sample = random.sample(sample_base, sample_size) if sample_size else []
 
 data = {
     "totalVotes": sum(votes),

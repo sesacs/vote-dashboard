@@ -51,7 +51,7 @@
     }
     .content {
       display: grid;
-      grid-template-columns: 2fr 1fr;
+      grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
       gap: 18px;
       padding: 22px 24px 26px;
     }
@@ -125,6 +125,7 @@
       text-align: left;
       line-height: 1.4;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      word-break: keep-all;
     }
     .meta {
       margin-top: 12px;

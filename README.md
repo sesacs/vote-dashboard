@@ -14,7 +14,7 @@
 작동 흐름
 ```mermaid
 flowchart TD
-  A[GitHub Actions cron<br>매 정시] --> B[curl 리더보드 HTML<br/>data/leaderboard.html]
+  A[GitHub Actions cron<br>30분마다] --> B[curl 리더보드 HTML<br/>data/leaderboard.html]
   B --> C[파싱 후 요약 JSON 생성<br/>data/summary.json]
   C --> D{변경 있음?}
   D -- yes --> E[commit & push]
