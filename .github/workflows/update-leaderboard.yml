@@ -186,7 +186,7 @@ jobs:
               "totalVotes": sum(votes),
               "voteValues": votes,
               "teamCount": len(votes),
-              "updatedAt": datetime.datetime.utcnow().isoformat() + "Z",
+              "updatedAt": datetime.datetime.now(datetime.UTC).isoformat() + "Z",
               "lowViewPool": low_view_pool,
               "allPosts": posts_unique,
           }
@@ -194,8 +194,7 @@ jobs:
           path = root.joinpath("summary.json")
           path.write_text(json.dumps(data, ensure_ascii=False, indent=2))
           print(f"votes: {len(votes)} items, sum {sum(votes)}")
-          print(f"codeshare posts(raw): {len(posts)}, unique: {len(posts_unique)}, sample size: {len(low_view_sample)}")
-          print(f"low sample: {low_view_sample}")
+          print(f"codeshare posts(raw): {len(posts)}, unique: {len(posts_unique)}, low view pool: {len(low_view_pool)}")
           PY
 
       - name: Commit & push if changed
