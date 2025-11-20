@@ -6,13 +6,12 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write # data/*를 커밋/푸시하려면 write 권한 필요
+  contents: write
 
 jobs:
   fetch:
     runs-on: ubuntu-latest
     env:
-      UA: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
       URL_LEADER: https://dacon.io/competitions/official/236624/leaderboard
       URL_CODESHARE: https://dacon.io/competitions/official/236624/codeshare
     steps:
@@ -21,56 +20,168 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Download leaderboard HTML
-        run: |
-          set -euo pipefail
-          mkdir -p data
-          curl -fL --retry 4 --retry-delay 3 -H "User-Agent: ${UA}" "$URL_LEADER" -o data/leaderboard.html
-          wc -c data/leaderboard.html
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
 
-      - name: Download codeshare list (multiple pages)
+      - name: Install Playwright
         run: |
-          set -euo pipefail
-          mkdir -p data
-          for page in $(seq 1 25); do
-            url="${URL_CODESHARE}?page=${page}&dtype=recent"
-            out="data/codeshare-${page}.html"
-            echo "Downloading $url -> $out"
-            curl -fL --retry 4 --retry-delay 3 -H "User-Agent: ${UA}" "$url" -o "$out"
-            wc -c "$out"
-          done
+          npm install -D playwright
+          npx playwright install chromium
+
+      - name: Create scraper script
+        run: |
+          cat > scraper.js <<'SCRIPT'
+          const { chromium } = require('playwright');
+          const fs = require('fs');
+          const path = require('path');
+
+          (async () => {
+            const browser = await chromium.launch({ headless: true });
+            const page = await browser.newPage();
+            
+            // 데이터 디렉토리 생성
+            const dataDir = path.join(__dirname, 'data');
+            if (!fs.existsSync(dataDir)) {
+              fs.mkdirSync(dataDir);
+            }
+
+            console.log('Fetching leaderboard...');
+            await page.goto(process.env.URL_LEADER, { waitUntil: 'networkidle' });
+            const leaderboardHtml = await page.content();
+            fs.writeFileSync(path.join(dataDir, 'leaderboard.html'), leaderboardHtml);
+            console.log(`Leaderboard saved: ${leaderboardHtml.length} bytes`);
+
+            console.log('Fetching codeshare...');
+            await page.goto(process.env.URL_CODESHARE, { waitUntil: 'networkidle' });
+            
+            // 더보기 버튼을 여러 번 클릭하여 모든 게시글 로드
+            let clickCount = 0;
+            const maxClicks = 50; // 최대 클릭 횟수 제한
+            
+            while (clickCount < maxClicks) {
+              try {
+                // 더보기 버튼 찾기
+                const loadMoreButton = await page.locator('button.bgBtn.primary--text, button:has-text("더보기")').first();
+                
+                // 버튼이 보이는지 확인
+                const isVisible = await loadMoreButton.isVisible({ timeout: 2000 }).catch(() => false);
+                
+                if (!isVisible) {
+                  console.log('더보기 버튼이 더 이상 없습니다.');
+                  break;
+                }
+                
+                console.log(`더보기 버튼 클릭 #${clickCount + 1}`);
+                await loadMoreButton.click();
+                
+                // 새 콘텐츠 로드 대기
+                await page.waitForTimeout(1000);
+                clickCount++;
+              } catch (error) {
+                console.log('더보기 버튼 클릭 종료:', error.message);
+                break;
+              }
+            }
+
+            console.log(`총 ${clickCount}번 더보기 클릭 완료`);
+
+            // 모든 게시글 데이터 추출
+            const posts = await page.evaluate(() => {
+              const items = [];
+              
+              // 게시글 카드 찾기 (구조에 따라 셀렉터 조정 필요)
+              const cards = document.querySelectorAll('a[href*="/codeshare/"]');
+              
+              cards.forEach(card => {
+                try {
+                  // 제목 추출
+                  const titleEl = card.querySelector('.title, [class*="title"]') || card;
+                  const title = titleEl.textContent.trim();
+                  
+                  // 조회수 추출 - 여러 가능한 셀렉터 시도
+                  let views = 0;
+                  const viewSelectors = [
+                    '.d-flex.align-center.text-caption.justify-center.py-0',
+                    '[class*="view"]',
+                    '.text-caption'
+                  ];
+                  
+                  for (const selector of viewSelectors) {
+                    const viewEl = card.querySelector(selector);
+                    if (viewEl) {
+                      const viewText = viewEl.textContent.trim();
+                      const match = viewText.match(/(\d+)/);
+                      if (match) {
+                        views = parseInt(match[1]);
+                        break;
+                      }
+                    }
+                  }
+                  
+                  // 카드 전체에서 숫자 찾기 (fallback)
+                  if (views === 0) {
+                    const allText = card.textContent;
+                    const numbers = allText.match(/\d+/g);
+                    if (numbers && numbers.length > 0) {
+                      // 가장 작은 숫자를 조회수로 간주 (보통 조회수가 가장 작음)
+                      views = Math.min(...numbers.map(n => parseInt(n)));
+                    }
+                  }
+                  
+                  if (title && title.length > 0) {
+                    items.push({ title, views });
+                  }
+                } catch (e) {
+                  console.error('게시글 파싱 오류:', e);
+                }
+              });
+              
+              return items;
+            });
+
+            console.log(`총 ${posts.length}개 게시글 추출`);
+            
+            // 추출된 데이터를 JSON으로 저장
+            fs.writeFileSync(
+              path.join(dataDir, 'codeshare-posts.json'),
+              JSON.stringify(posts, null, 2)
+            );
+
+            await browser.close();
+          })();
+          SCRIPT
+
+      - name: Run scraper
+        run: node scraper.js
 
       - name: Build summary JSON
         run: |
-          set -euo pipefail
           python3 - <<'PY'
-          import re, json, pathlib, datetime, random, html as htmllib
+          import re, json, pathlib, datetime, random
 
           root = pathlib.Path("data")
           leader_html = root.joinpath("leaderboard.html").read_text()
-          codeshare_files = sorted(root.glob("codeshare-*.html"))
-
+          
           # 1) votes from leaderboard
           pattern = re.compile(r'<li class="vote[^>]*>\s*<span[^>]*>\s*([\d,]+)\s*</span>.*?<li class="date', re.S)
           votes = [int(x.replace(",", "")) for x in pattern.findall(leader_html)]
 
-          # 2) codeshare titles and views from __NUXT__ payload (title:"...", view_cnt:123)
-          post_pattern = re.compile(r'title:\"([^\"]+?)\".*?view_cnt:(\d+)', re.S)
-          posts = []
-          for f in codeshare_files:
-            html_txt = f.read_text()
-            posts.extend({"title": htmllib.unescape(t.strip()), "views": int(v)} for t, v in post_pattern.findall(html_txt))
+          # 2) codeshare posts from Playwright scraping
+          posts_file = root.joinpath("codeshare-posts.json")
+          posts = json.loads(posts_file.read_text()) if posts_file.exists() else []
 
           # dedupe by title (keep min views)
           dedup = {}
           for p in posts:
-            if p["title"] not in dedup or p["views"] < dedup[p["title"]]["views"]:
-              dedup[p["title"]] = p
+              if p["title"] not in dedup or p["views"] < dedup[p["title"]]["views"]:
+                  dedup[p["title"]] = p
           posts_unique = list(dedup.values())
 
-          posts_sorted = sorted(posts_unique, key=lambda x: x["views"])  # 오름차순
-          low_pool = posts_sorted[:30] if posts_sorted else []  # 하위 30개
-          sample_base = low_pool[:15] if len(low_pool) > 15 else low_pool  # 너무 상위가 섞이지 않게 하위 15개까지만 샘플링
+          posts_sorted = sorted(posts_unique, key=lambda x: x["views"])
+          low_pool = posts_sorted[:30] if posts_sorted else []
+          sample_base = low_pool[:15] if len(low_pool) > 15 else low_pool
           sample_size = min(5, len(sample_base))
           low_view_sample = random.sample(sample_base, sample_size) if sample_size else []
 
@@ -80,6 +191,7 @@ jobs:
               "teamCount": len(votes),
               "updatedAt": datetime.datetime.utcnow().isoformat() + "Z",
               "lowViewSample": low_view_sample,
+              "allPosts": posts_unique,
           }
 
           path = root.joinpath("summary.json")
@@ -98,7 +210,7 @@ jobs:
         run: |
           set -euo pipefail
           if git status --porcelain | grep .; then
-            git add data/leaderboard.html data/summary.json
+            git add data/
             git commit -m "chore: refresh leaderboard snapshot"
             git push
           else
