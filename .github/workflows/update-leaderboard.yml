@@ -39,39 +39,39 @@ jobs:
         run: |
           set -euo pipefail
           python3 - <<'PY'
-import re, json, pathlib, datetime, random, html as htmllib
+          import re, json, pathlib, datetime, random, html as htmllib
 
-root = pathlib.Path("data")
-leader_html = root.joinpath("leaderboard.html").read_text()
-codeshare_html = root.joinpath("codeshare.html").read_text()
+          root = pathlib.Path("data")
+          leader_html = root.joinpath("leaderboard.html").read_text()
+          codeshare_html = root.joinpath("codeshare.html").read_text()
 
-# 1) votes from leaderboard
-pattern = re.compile(r'<li class="vote[^>]*>\s*<span[^>]*>\s*([\d,]+)\s*</span>.*?<li class="date', re.S)
-votes = [int(x.replace(",", "")) for x in pattern.findall(leader_html)]
+          # 1) votes from leaderboard
+          pattern = re.compile(r'<li class="vote[^>]*>\s*<span[^>]*>\s*([\d,]+)\s*</span>.*?<li class="date', re.S)
+          votes = [int(x.replace(",", "")) for x in pattern.findall(leader_html)]
 
-# 2) codeshare titles and views from __NUXT__ payload (title:"...", view_cnt:123)
-post_pattern = re.compile(r'title:\"([^\"]+?)\".*?view_cnt:(\d+)', re.S)
-posts = [{"title": htmllib.unescape(t.strip()), "views": int(v)} for t, v in post_pattern.findall(codeshare_html)]
-posts_sorted = sorted(posts, key=lambda x: x["views"])  # 오름차순
-low_pool = posts_sorted[:30] if posts_sorted else []  # 하위 30개
-sample_base = low_pool[:15] if len(low_pool) > 15 else low_pool  # 너무 상위가 섞이지 않게 하위 15개까지만 샘플링
-sample_size = min(5, len(sample_base))
-low_view_sample = random.sample(sample_base, sample_size) if sample_size else []
+          # 2) codeshare titles and views from __NUXT__ payload (title:"...", view_cnt:123)
+          post_pattern = re.compile(r'title:\"([^\"]+?)\".*?view_cnt:(\d+)', re.S)
+          posts = [{"title": htmllib.unescape(t.strip()), "views": int(v)} for t, v in post_pattern.findall(codeshare_html)]
+          posts_sorted = sorted(posts, key=lambda x: x["views"])  # 오름차순
+          low_pool = posts_sorted[:30] if posts_sorted else []  # 하위 30개
+          sample_base = low_pool[:15] if len(low_pool) > 15 else low_pool  # 너무 상위가 섞이지 않게 하위 15개까지만 샘플링
+          sample_size = min(5, len(sample_base))
+          low_view_sample = random.sample(sample_base, sample_size) if sample_size else []
 
-data = {
-    "totalVotes": sum(votes),
-    "voteValues": votes,
-    "teamCount": len(votes),
-    "updatedAt": datetime.datetime.utcnow().isoformat() + "Z",
-    "lowViewSample": low_view_sample,
-}
+          data = {
+              "totalVotes": sum(votes),
+              "voteValues": votes,
+              "teamCount": len(votes),
+              "updatedAt": datetime.datetime.utcnow().isoformat() + "Z",
+              "lowViewSample": low_view_sample,
+          }
 
-path = root.joinpath("summary.json")
-path.write_text(json.dumps(data, ensure_ascii=False, indent=2))
-print(f"votes: {len(votes)} items, sum {sum(votes)}")
-print(f"codeshare posts: {len(posts)}, sample size: {len(low_view_sample)}")
-print(f"low sample: {low_view_sample}")
-PY
+          path = root.joinpath("summary.json")
+          path.write_text(json.dumps(data, ensure_ascii=False, indent=2))
+          print(f"votes: {len(votes)} items, sum {sum(votes)}")
+          print(f"codeshare posts: {len(posts)}, sample size: {len(low_view_sample)}")
+          print(f"low sample: {low_view_sample}")
+          PY
 
       - name: Commit & push if changed
         env:
