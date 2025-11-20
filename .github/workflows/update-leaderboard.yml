@@ -32,7 +32,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p data
-          for page in 1 2 3 4 5; do
+          for page in $(seq 1 25); do
             url="${URL_CODESHARE}?page=${page}&dtype=recent"
             out="data/codeshare-${page}.html"
             echo "Downloading $url -> $out"
