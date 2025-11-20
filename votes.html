@@ -214,19 +214,21 @@
           <li>–</li>
         </ul>
         <p class="meta" style="margin-top:14px;">
-          브라우저에서 직접 <code>dacon.io</code> 페이지를 불러와 HTML을 파싱합니다. CORS 정책에 따라 차단될 수 있으며, 실패 시 Python 스크립트(example.py)처럼 로컬에서 실행하세요.
+          브라우저에서 직접 <code>dacon.io</code> 페이지를 불러와 HTML을 파싱합니다. CORS 정책에 따라 차단될 수 있으며, 실패 시 Python 스크립트(example.py)처럼 로컬에서 실행하세요. 여러 프록시를 거친 뒤 모두 실패하면 레포의 캐시 스냅샷(<code>data/leaderboard.html</code>)을 사용합니다.
         </p>
       </article>
     </section>
   </main>
   <script>
     const URL = "https://dacon.io/competitions/official/236624/leaderboard";
+    const SNAPSHOT_URL = "https://raw.githubusercontent.com/sesacs/vote-dashboard/main/data/leaderboard.html";
     // CORS 우회를 위한 프록시. 첫 번째는 직접 요청이고, 이후 순차로 시도한다.
     const PROXY_URLS = [
       URL,
       "https://cors.isomorphic-git.org/https://dacon.io/competitions/official/236624/leaderboard",
       "https://api.allorigins.win/raw?url=https%3A%2F%2Fdacon.io%2Fcompetitions%2Fofficial%2F236624%2Fleaderboard",
       "https://r.jina.ai/https://dacon.io/competitions/official/236624/leaderboard",
+      SNAPSHOT_URL, // 최종 캐시
     ];
     const TOTAL_TEAMS = 182;
     const VOTES_PER_TEAM_LEADER = 30;
@@ -334,7 +336,7 @@
           const resp = await fetch(target, { cache: "no-store" });
           if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
           const html = await resp.text();
-          return html;
+          return { html, source: target };
         } catch (err) {
           lastError = err;
           console.warn("fetch failed, trying next target", target, err);
@@ -353,11 +355,12 @@
       els.teamCount.textContent = "-";
 
       try {
-        const html = await fetchWithFallback(PROXY_URLS);
+        const { html, source } = await fetchWithFallback(PROXY_URLS);
         const result = extractVotesFromHTML(html);
 
         renderStats(result);
-        setStatus("계산 완료", "success");
+        const usedCache = source === SNAPSHOT_URL;
+        setStatus(usedCache ? "계산 완료 (캐시 사용)" : "계산 완료", "success");
       } catch (err) {
         console.error(err);
         renderError("브라우저에서 dacon.io 요청이 차단되었거나 네트워크 오류가 발생했습니다.");

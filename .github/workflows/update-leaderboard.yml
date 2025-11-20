@@ -1,0 +1,37 @@
+name: Update leaderboard snapshot
+
+on:
+  schedule:
+    - cron: "0 * * * *" # 매시간 캐시 갱신 시도
+  workflow_dispatch:
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download leaderboard HTML
+        run: |
+          set -euo pipefail
+          mkdir -p data
+          curl -L "https://dacon.io/competitions/official/236624/leaderboard" -o data/leaderboard.html
+
+      - name: Commit & push if changed
+        env:
+          GIT_AUTHOR_NAME: github-actions
+          GIT_AUTHOR_EMAIL: actions@users.noreply.github.com
+          GIT_COMMITTER_NAME: github-actions
+          GIT_COMMITTER_EMAIL: actions@users.noreply.github.com
+        run: |
+          set -euo pipefail
+          if git status --porcelain | grep .; then
+            git add data/leaderboard.html
+            git commit -m "chore: refresh leaderboard snapshot"
+            git push
+          else
+            echo "No changes to commit."
+          fi
