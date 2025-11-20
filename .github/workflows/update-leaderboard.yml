@@ -49,6 +49,24 @@ jobs:
 
             console.log('Fetching leaderboard...');
             await page.goto(process.env.URL_LEADER, { waitUntil: 'networkidle' });
+            
+            // 리더보드에서 투표수 추출
+            const votes = await page.evaluate(() => {
+              const voteElements = document.querySelectorAll('.vote.fl.tc');
+              return Array.from(voteElements).map(el => {
+                const text = el.textContent.trim().replace(/,/g, '');
+                return parseInt(text) || 0;
+              }).filter(v => v > 0);
+            });
+            
+            console.log(`Extracted ${votes.length} votes from leaderboard`);
+            
+            // 투표수 데이터를 JSON으로 저장
+            fs.writeFileSync(
+              path.join(dataDir, 'votes.json'),
+              JSON.stringify(votes, null, 2)
+            );
+            
             const leaderboardHtml = await page.content();
             fs.writeFileSync(path.join(dataDir, 'leaderboard.html'), leaderboardHtml);
             console.log(`Leaderboard saved: ${leaderboardHtml.length} bytes`);
@@ -91,46 +109,40 @@ jobs:
             const posts = await page.evaluate(() => {
               const items = [];
               
-              // 게시글 카드 찾기 (구조에 따라 셀렉터 조정 필요)
-              const cards = document.querySelectorAll('a[href*="/codeshare/"]');
+              // 게시글 카드가 포함된 컨테이너 찾기
+              const containers = document.querySelectorAll('div');
               
-              cards.forEach(card => {
+              containers.forEach(container => {
                 try {
+                  // 제목 링크 찾기
+                  const titleLink = container.querySelector('a[href*="/codeshare/"]');
+                  if (!titleLink) return;
+                  
                   // 제목 추출
-                  const titleEl = card.querySelector('.title, [class*="title"]') || card;
-                  const title = titleEl.textContent.trim();
+                  let title = '';
+                  const titleEl = titleLink.querySelector('.title, [class*="title"], h3, h4');
+                  if (titleEl) {
+                    title = titleEl.textContent.trim();
+                  } else {
+                    const lines = titleLink.textContent.split('\n').filter(l => l.trim());
+                    if (lines.length > 0) title = lines[0].trim();
+                  }
                   
-                  // 조회수 추출 - 여러 가능한 셀렉터 시도
+                  if (!title || title.length < 3) return;
+                  
+                  // 같은 컨테이너 내에서 조회수 찾기
                   let views = 0;
-                  const viewSelectors = [
-                    '.d-flex.align-center.text-caption.justify-center.py-0',
-                    '[class*="view"]',
-                    '.text-caption'
-                  ];
+                  const viewEl = container.querySelector('.d-flex.align-center.text-caption.justify-center.py-0');
                   
-                  for (const selector of viewSelectors) {
-                    const viewEl = card.querySelector(selector);
-                    if (viewEl) {
-                      const viewText = viewEl.textContent.trim();
-                      const match = viewText.match(/(\d+)/);
-                      if (match) {
-                        views = parseInt(match[1]);
-                        break;
-                      }
+                  if (viewEl) {
+                    const text = viewEl.textContent.trim().replace(/,/g, '');
+                    const match = text.match(/\d+/);
+                    if (match) {
+                      views = parseInt(match[0]);
                     }
                   }
                   
-                  // 카드 전체에서 숫자 찾기 (fallback)
-                  if (views === 0) {
-                    const allText = card.textContent;
-                    const numbers = allText.match(/\d+/g);
-                    if (numbers && numbers.length > 0) {
-                      // 가장 작은 숫자를 조회수로 간주 (보통 조회수가 가장 작음)
-                      views = Math.min(...numbers.map(n => parseInt(n)));
-                    }
-                  }
-                  
-                  if (title && title.length > 0) {
+                  if (title.length < 200) {
                     items.push({ title, views });
                   }
                 } catch (e) {
@@ -138,7 +150,17 @@ jobs:
                 }
               });
               
-              return items;
+              // 중복 제거 (같은 제목이 여러 번 나올 수 있음)
+              const unique = [];
+              const seen = new Set();
+              items.forEach(item => {
+                if (!seen.has(item.title)) {
+                  seen.add(item.title);
+                  unique.push(item);
+                }
+              });
+              
+              return unique;
             });
 
             console.log(`총 ${posts.length}개 게시글 추출`);
@@ -159,14 +181,13 @@ jobs:
       - name: Build summary JSON
         run: |
           python3 - <<'PY'
-          import re, json, pathlib, datetime, random
+          import json, pathlib, datetime
 
           root = pathlib.Path("data")
-          leader_html = root.joinpath("leaderboard.html").read_text()
           
-          # 1) votes from leaderboard
-          pattern = re.compile(r'<li class="vote[^>]*>\s*<span[^>]*>\s*([\d,]+)\s*</span>.*?<li class="date', re.S)
-          votes = [int(x.replace(",", "")) for x in pattern.findall(leader_html)]
+          # 1) votes from Playwright scraping
+          votes_file = root.joinpath("votes.json")
+          votes = json.loads(votes_file.read_text()) if votes_file.exists() else []
 
           # 2) codeshare posts from Playwright scraping
           posts_file = root.joinpath("codeshare-posts.json")
