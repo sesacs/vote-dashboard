@@ -178,7 +178,7 @@
   <main>
     <header>
       <h1>데이콘 남은 투표 계산기</h1>
-      <p>example.py 로 계산하던 "참가팀 기준 남은 상호 투표 수"를 브라우저에서 바로 확인합니다. 리더보드 페이지의 시간 표기(몇 시간/분 전 등) 앞에 붙은 숫자 값을 모아 합산합니다.</p>
+      <p>"참가팀 기준 남은 상호 투표 수와 낮은 조회 수를 가진 팀"을 브라우저에서 바로 확인합니다. 리더보드 페이지의 시간 표기(몇 시간/분 전 등) 앞에 붙은 숫자 값을 모아 합산합니다.</p>
     </header>
     <section class="content">
       <article class="card" aria-live="polite">
@@ -282,6 +282,14 @@
       });
     }
 
+    function parseUpdatedAt(value) {
+      if (!value) return new Date();
+      // GitHub Actions 출력 포맷(+00:00Z) 보완: 불필요한 Z 제거 후 파싱
+      const cleaned = value.replace("+00:00Z", "+00:00");
+      const date = new Date(cleaned);
+      return isNaN(date) ? new Date() : date;
+    }
+
     function renderStats({ totalVotes, voteValues, updatedAt, lowViewPool }) {
       const totalPossible = TOTAL_TEAMS * VOTES_PER_TEAM_LEADER;
       const remaining = totalPossible - totalVotes;
@@ -290,9 +298,7 @@
       els.remaining.textContent = `${format(Math.max(remaining, 0))}표`;
       els.possible.textContent = `${format(totalPossible)}표`;
       els.teamCount.textContent = `${voteValues.length}팀`;
-      const timeText = updatedAt
-        ? new Date(updatedAt).toLocaleString("ko-KR")
-        : new Date().toLocaleString("ko-KR");
+      const timeText = parseUpdatedAt(updatedAt).toLocaleString("ko-KR");
       els.updatedAt.textContent = `마지막 계산: ${timeText}`;
 
       currentPool = lowViewPool || [];
