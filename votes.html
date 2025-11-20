@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>데이콘 남은 투표 계산기</title>
+  <style>
+    :root {
+      --bg: radial-gradient(circle at 15% 20%, #f6f9ff, #e5ecf6 50%, #dfe7f2 100%);
+      --panel: #0b1224;
+      --text: #0d1021;
+      --muted: #4b5567;
+      --accent: #0f8ec7;
+      --success: #0d9d68;
+      --error: #d13f4f;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      font-family: "Pretendard", "Noto Sans KR", "Helvetica Neue", "Segoe UI", sans-serif;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+    }
+    main {
+      width: min(960px, 100%);
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 24px;
+      box-shadow: 0 15px 60px rgba(13, 16, 33, 0.12);
+      border: 1px solid rgba(13, 16, 33, 0.08);
+      overflow: hidden;
+    }
+    header {
+      padding: 28px;
+      border-bottom: 1px solid rgba(13, 16, 33, 0.06);
+      background: linear-gradient(120deg, rgba(15, 142, 199, 0.08), rgba(13, 16, 33, 0));
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(22px, 3vw, 28px);
+      letter-spacing: -0.02em;
+    }
+    header p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .content {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 18px;
+      padding: 22px 24px 26px;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid rgba(13, 16, 33, 0.04);
+      border-radius: 16px;
+      padding: 18px 18px 14px;
+      box-shadow: 0 8px 24px rgba(13, 16, 33, 0.06);
+    }
+    .card h2 {
+      margin: 0 0 12px;
+      font-size: 17px;
+      letter-spacing: -0.01em;
+    }
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(15, 142, 199, 0.12);
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .status.error { background: rgba(209, 63, 79, 0.12); color: var(--error); }
+    .status.success { background: rgba(13, 157, 104, 0.12); color: var(--success); }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .stat {
+      padding: 14px;
+      border-radius: 12px;
+      background: linear-gradient(130deg, rgba(15, 142, 199, 0.1), rgba(15, 142, 199, 0.02));
+      border: 1px solid rgba(15, 142, 199, 0.15);
+    }
+    .stat small {
+      display: block;
+      color: var(--muted);
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+    .stat strong {
+      font-size: 18px;
+      letter-spacing: -0.01em;
+    }
+    .stat.subtle {
+      background: #f7f8fb;
+      border-color: rgba(13, 16, 33, 0.08);
+    }
+    .list {
+      margin: 10px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+      gap: 8px;
+    }
+    .list li {
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: #0f162a;
+      color: #f8fafc;
+      font-weight: 600;
+      text-align: center;
+    }
+    .meta {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+    }
+    .actions {
+      margin-top: 14px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    button {
+      border: none;
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      background: var(--accent);
+      color: #fff;
+      transition: transform 120ms ease, box-shadow 160ms ease;
+      box-shadow: 0 8px 18px rgba(15, 142, 199, 0.25);
+    }
+    button.secondary {
+      background: #fff;
+      color: var(--text);
+      border: 1px solid rgba(13, 16, 33, 0.08);
+      box-shadow: none;
+    }
+    button:active { transform: translateY(1px); }
+    a {
+      color: var(--accent);
+      font-weight: 700;
+      text-decoration: none;
+    }
+    a:hover { text-decoration: underline; }
+    @media (max-width: 760px) {
+      body { padding: 18px; }
+      .content { grid-template-columns: 1fr; }
+      main { border-radius: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>데이콘 남은 투표 계산기</h1>
+      <p>example.py 로 계산하던 “참가팀 기준 남은 상호 투표 수”를 브라우저에서 바로 확인합니다. 리더보드 페이지의 시간 표기(몇 시간/분 전 등) 앞에 붙은 숫자 값을 모아 합산합니다.</p>
+    </header>
+    <section class="content">
+      <article class="card" aria-live="polite">
+        <div class="status" id="status">대기 중 – 새로고침을 눌러 계산하세요</div>
+        <div class="grid">
+          <div class="stat">
+            <small>집계된 상호 투표 수 합계</small>
+            <strong id="total-votes">-</strong>
+          </div>
+          <div class="stat">
+            <small>남은 표 수(이론상)</small>
+            <strong id="remaining">-</strong>
+          </div>
+          <div class="stat subtle">
+            <small>참가팀 기준 전체 가능 표 수</small>
+            <strong id="possible-votes">-</strong>
+          </div>
+          <div class="stat subtle">
+            <small>팀 수(시간표기 발견된 팀)</small>
+            <strong id="team-count">-</strong>
+          </div>
+        </div>
+        <div class="actions">
+          <button id="run-btn" type="button">다시 계산</button>
+          <button id="open-src" type="button" class="secondary">리더보드 열기</button>
+        </div>
+        <div class="meta">
+          <span>전체 팀 수 기준: <strong>182</strong>팀</span>
+          <span>팀장당 투표권: <strong>30</strong>표</span>
+          <span id="updated-at">마지막 계산: -</span>
+        </div>
+        <p id="error" style="color:var(--error); font-weight:700; margin-top:10px; display:none;"></p>
+      </article>
+      <article class="card">
+        <h2>팀별 투표수 샘플 (앞 10개)</h2>
+        <ul class="list" id="sample-list">
+          <li>–</li>
+          <li>–</li>
+          <li>–</li>
+        </ul>
+        <p class="meta" style="margin-top:14px;">
+          브라우저에서 직접 <code>dacon.io</code> 페이지를 불러와 HTML을 파싱합니다. CORS 정책에 따라 차단될 수 있으며, 실패 시 Python 스크립트(example.py)처럼 로컬에서 실행하세요.
+        </p>
+      </article>
+    </section>
+  </main>
+  <script>
+    const URL = "https://dacon.io/competitions/official/236624/leaderboard";
+    const TOTAL_TEAMS = 182;
+    const VOTES_PER_TEAM_LEADER = 30;
+    const MAX_SAMPLE = 10;
+
+    const els = {
+      status: document.getElementById("status"),
+      totalVotes: document.getElementById("total-votes"),
+      remaining: document.getElementById("remaining"),
+      possible: document.getElementById("possible-votes"),
+      teamCount: document.getElementById("team-count"),
+      updatedAt: document.getElementById("updated-at"),
+      sample: document.getElementById("sample-list"),
+      error: document.getElementById("error"),
+      runBtn: document.getElementById("run-btn"),
+      openSrc: document.getElementById("open-src"),
+    };
+
+    const format = (n) => new Intl.NumberFormat("ko-KR").format(n);
+
+    function setStatus(text, kind = "info") {
+      els.status.textContent = text;
+      els.status.className = "status" + (kind === "error" ? " error" : kind === "success" ? " success" : "");
+    }
+
+    function renderSample(votes) {
+      els.sample.innerHTML = "";
+      if (!votes.length) {
+        els.sample.innerHTML = "<li>값을 찾지 못했습니다</li>";
+        return;
+      }
+      votes.slice(0, MAX_SAMPLE).forEach((v) => {
+        const li = document.createElement("li");
+        li.textContent = format(v);
+        els.sample.appendChild(li);
+      });
+    }
+
+    function renderStats({ totalVotes, voteValues }) {
+      const totalPossible = TOTAL_TEAMS * VOTES_PER_TEAM_LEADER;
+      const remaining = totalPossible - totalVotes;
+
+      els.totalVotes.textContent = `${format(totalVotes)}표`;
+      els.remaining.textContent = `${format(Math.max(remaining, 0))}표`;
+      els.possible.textContent = `${format(totalPossible)}표`;
+      els.teamCount.textContent = `${voteValues.length}팀`;
+      els.updatedAt.textContent = `마지막 계산: ${new Date().toLocaleString("ko-KR")}`;
+
+      renderSample(voteValues);
+    }
+
+    function renderError(message) {
+      els.error.style.display = "block";
+      els.error.textContent = message;
+      setStatus("계산 실패 – CORS 차단 또는 일시적 오류", "error");
+    }
+
+    function clearError() {
+      els.error.style.display = "none";
+      els.error.textContent = "";
+    }
+
+    function extractVotesFromHTML(htmlText) {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(htmlText, "text/html");
+      const body = doc.body;
+      if (!body) return { voteValues: [], totalVotes: 0 };
+
+      const datePattern = /(하루 전|\d+일 전|\d+시간 전|\d+분 전|\d+주 전|\d+달 전|\d+년 전)/;
+      const walker = doc.createTreeWalker(body, NodeFilter.SHOW_TEXT, {
+        acceptNode(node) {
+          return datePattern.test(node.nodeValue) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
+        },
+      });
+
+      let node;
+      const voteValues = [];
+      let totalVotes = 0;
+
+      while ((node = walker.nextNode())) {
+        const parent = node.parentNode;
+        if (!parent) continue;
+
+        let prev = parent.previousSibling;
+        while (prev && prev.nodeType === Node.TEXT_NODE && prev.nodeValue.trim() === "") {
+          prev = prev.previousSibling;
+        }
+        if (!prev) continue;
+
+        const text = prev.textContent !== undefined ? prev.textContent.trim() : String(prev).trim();
+        if (/^\d+$/.test(text)) {
+          const votes = Number(text);
+          voteValues.push(votes);
+          totalVotes += votes;
+        }
+      }
+
+      return { voteValues, totalVotes };
+    }
+
+    async function calculate() {
+      clearError();
+      setStatus("리더보드 불러오는 중...", "info");
+      renderSample([]);
+      els.totalVotes.textContent = "-";
+      els.remaining.textContent = "-";
+      els.possible.textContent = "-";
+      els.teamCount.textContent = "-";
+
+      try {
+        const resp = await fetch(URL, { cache: "no-store" });
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+        const html = await resp.text();
+        const result = extractVotesFromHTML(html);
+
+        renderStats(result);
+        setStatus("계산 완료", "success");
+      } catch (err) {
+        console.error(err);
+        renderError("브라우저에서 dacon.io 요청이 차단되었거나 네트워크 오류가 발생했습니다.");
+      }
+    }
+
+    els.runBtn.addEventListener("click", calculate);
+    els.openSrc.addEventListener("click", () => window.open(URL, "_blank", "noopener"));
+
+    calculate();
+  </script>
+</body>
+</html>
