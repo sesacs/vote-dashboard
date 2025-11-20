@@ -221,10 +221,12 @@
   </main>
   <script>
     const URL = "https://dacon.io/competitions/official/236624/leaderboard";
+    // CORS 우회를 위한 프록시. 첫 번째는 직접 요청이고, 이후 순차로 시도한다.
     const PROXY_URLS = [
       URL,
-      // CORS 우회를 위한 프록시. 순차로 시도한다.
       "https://cors.isomorphic-git.org/https://dacon.io/competitions/official/236624/leaderboard",
+      "https://api.allorigins.win/raw?url=https%3A%2F%2Fdacon.io%2Fcompetitions%2Fofficial%2F236624%2Fleaderboard",
+      "https://r.jina.ai/https://dacon.io/competitions/official/236624/leaderboard",
     ];
     const TOTAL_TEAMS = 182;
     const VOTES_PER_TEAM_LEADER = 30;
