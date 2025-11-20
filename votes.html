@@ -259,7 +259,7 @@
       });
     }
 
-    function renderStats({ totalVotes, voteValues }) {
+    function renderStats({ totalVotes, voteValues, updatedAt }) {
       const totalPossible = TOTAL_TEAMS * VOTES_PER_TEAM_LEADER;
       const remaining = totalPossible - totalVotes;
 
@@ -267,7 +267,10 @@
       els.remaining.textContent = `${format(Math.max(remaining, 0))}표`;
       els.possible.textContent = `${format(totalPossible)}표`;
       els.teamCount.textContent = `${voteValues.length}팀`;
-      els.updatedAt.textContent = `마지막 계산: ${new Date().toLocaleString("ko-KR")}`;
+      const timeText = updatedAt
+        ? new Date(updatedAt).toLocaleString("ko-KR")
+        : new Date().toLocaleString("ko-KR");
+      els.updatedAt.textContent = `마지막 계산: ${timeText}`;
 
       renderSample(voteValues);
     }
