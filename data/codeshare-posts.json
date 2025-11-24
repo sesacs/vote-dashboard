@@ -1,726 +1,726 @@
 [
   {
+    "title": "[패션스타즈] 당신의 옷장 속에 숨어 있는 스타일을 AI가 깨웁니다: 오늘 뭐 입지?",
+    "views": 289
+  },
+  {
+    "title": "[WeBridge] 복지이음: LLM-RAG 기반 개인 맞춤형 음성 복지 서비스",
+    "views": 108
+  },
+  {
+    "title": "[TP] Payple",
+    "views": 135
+  },
+  {
+    "title": "[문래개발촌] 서로의 지혜를 마주 보는 곳 : 마주.ai",
+    "views": 124
+  },
+  {
+    "title": "[대피하산] 대피하산",
+    "views": 131
+  },
+  {
+    "title": "[사과조리법] 다시봄",
+    "views": 92
+  },
+  {
     "title": "[시냅스] 모멘텀(Momentum)",
-    "views": 145
+    "views": 146
   },
   {
-    "title": "[RAUM] RAUM",
-    "views": 82
+    "title": "AgentQuest 기획서",
+    "views": 133
   },
   {
-    "title": "[수상한디] 서울 집사 AI:  서울 청년 및 1인 가구를 위한 AI 주거 계약 길잡이",
-    "views": 121
+    "title": "AI 와 함께 만드는 새로운 수업 : AI꾸러기 수업",
+    "views": 301
   },
   {
-    "title": "[백야] 영케어러(가족돌봄청년)를 발굴하고 기관과 연결하는 AI 챗봇 서비스",
-    "views": 93
+    "title": "Next me (넥스트 미) -프로젝트 경험을 기반으로 한 인터랙티브 AI 커리어 코치 서비스",
+    "views": 328
+  },
+  {
+    "title": "[같이놀래] 같이볼래 - 경계없는 e스포츠 중계",
+    "views": 134
+  },
+  {
+    "title": "[서빙고] AI싹쓰리",
+    "views": 106
+  },
+  {
+    "title": "팀 도리토스 - AI 맛집 지도 '맛.zip' 기획서 및 코드 제출",
+    "views": 113
+  },
+  {
+    "title": "[GoD] 딥러닝 기반 실시간 Multi-Camera 위험 상황 판단 및 추적 대응 관제 시스템",
+    "views": 78
+  },
+  {
+    "title": "[펫뷸런스] 펫뷸런스",
+    "views": 281
   },
   {
     "title": "[씨앗 메이트] 씨앗 메이트",
     "views": 106
   },
   {
-    "title": "[패션스타즈] 당신의 옷장 속에 숨어 있는 스타일을 AI가 깨웁니다: 오늘 뭐 입지?",
-    "views": 285
-  },
-  {
-    "title": "[TP] Payple",
-    "views": 132
-  },
-  {
-    "title": "[VLAssom] 피지컬 AI 로봇 도우미",
-    "views": 361
-  },
-  {
-    "title": "[깜자와꽁주] 피싱 세이프 AI",
-    "views": 90
-  },
-  {
-    "title": "[강동에번쩍] 밥스캔 - AI 메뉴판 상세 번역 및 맞춤 추천",
-    "views": 135
-  },
-  {
-    "title": "[커넥터] 커리어브릿지",
-    "views": 124
-  },
-  {
-    "title": "[기획서] 트립쏙서울",
-    "views": 109
-  },
-  {
-    "title": "Next me (넥스트 미) -프로젝트 경험을 기반으로 한 인터랙티브 AI 커리어 코치 서비스",
-    "views": 313
-  },
-  {
-    "title": "[ITCO] 장봄",
-    "views": 135
-  },
-  {
-    "title": "[PrePair] AI 기반 맞춤형 면접 코치 플랫폼",
-    "views": 216
-  },
-  {
-    "title": "[애햄춘복울멍이] 간편 약물 관리 서비스 PillMate(필메이트)",
-    "views": 300
-  },
-  {
-    "title": "[싸우지말자] 모야(MOYA)",
-    "views": 327
-  },
-  {
-    "title": "[Aetheria] AI 기반 사용자 맞춤형 러닝 경로 아트 생성 웹 서비스",
-    "views": 288
-  },
-  {
-    "title": "[숲 (For:Rest)] 홀씨: 고립·은둔 청년과 함께하는 가족을 위한 AI 서비스",
-    "views": 253
-  },
-  {
-    "title": "[AIQ] Quest of Seoul / AI 도슨트와 함께 떠나는 서울  여행",
-    "views": 408
-  },
-  {
-    "title": "[AIFIXR] 팀 기획안 및 Githhub Repository 링크 제출합니다.",
-    "views": 71
-  },
-  {
-    "title": "[동근이하은] MemoIt",
-    "views": 67
-  },
-  {
-    "title": "[SBAI] 통계 검색 챗봇, 이지스탯 Q",
-    "views": 95
-  },
-  {
-    "title": "[시루와 방실이] 드림라이트",
-    "views": 95
-  },
-  {
-    "title": "팀 고등어향 아기고양이 예선작 제출합니다.",
-    "views": 205
-  },
-  {
-    "title": "[말모 팀] 애착유형 기반 AI 연애 고민 상담 '말모'",
-    "views": 169
-  },
-  {
-    "title": "[EUME] 이음이 - 서울시의 고립은둔청년을 위한 정서 돌봄 AI 서비스",
-    "views": 272
-  },
-  {
-    "title": "다문화 도우미",
-    "views": 135
-  },
-  {
-    "title": "[같이놀래] 같이볼래 - 경계없는 e스포츠 중계",
-    "views": 132
-  },
-  {
-    "title": "[에스파드] Pree",
-    "views": 146
-  },
-  {
-    "title": "[4팀] RAG·LLM 기반 읽기 난이도 조절 뉴스 서비스",
-    "views": 119
-  },
-  {
-    "title": "[부부단] 집덕 AI청약도우미",
-    "views": 443
-  },
-  {
-    "title": "[IIS] EVB : V2X 시스템을 활용한 AI 자율주행 시스템 기반 EV 무인 충전 로봇 서비스",
-    "views": 87
-  },
-  {
-    "title": "[세미콜론] 공공이",
-    "views": 143
-  },
-  {
-    "title": "[식스센스] 다시잡",
-    "views": 103
-  },
-  {
-    "title": "[나루] AI 기반 실시간 민원 상담 서비스",
-    "views": 99
-  },
-  {
-    "title": "[해적단]IssueTalk(이슈톡)",
-    "views": 213
-  },
-  {
-    "title": "팀 도리토스 - AI 맛집 지도 '맛.zip' 기획서 및 코드 제출",
-    "views": 110
-  },
-  {
-    "title": "팀_온기 기획서 제출합니다.",
-    "views": 162
-  },
-  {
-    "title": "[밤티] ONION 기획서",
-    "views": 244
-  },
-  {
-    "title": "[양박신사] KEEPIT(키핏)",
-    "views": 225
-  },
-  {
-    "title": "[대 선 린] LINKA",
-    "views": 207
-  },
-  {
-    "title": "[대피하산] 대피하산",
-    "views": 129
-  },
-  {
-    "title": "AI 케어콜 기반 올인원 시니어 건강관리 서비스 “메디케어콜”",
-    "views": 111
-  },
-  {
-    "title": "금융 교육 AI 서비스 \"키득\" 기획서 제출합니다.",
-    "views": 141
-  },
-  {
-    "title": "[베트맨] bat",
-    "views": 108
-  },
-  {
-    "title": "[스드메의 문단속] Plan A(플랜A)",
-    "views": 530
-  },
-  {
-    "title": "[Veritas] Veritas AI",
-    "views": 86
-  },
-  {
-    "title": "[네개의-두뇌] 복지 나침반(서울시 AI 복지 매칭 서비스)",
-    "views": 116
-  },
-  {
-    "title": "팀 불도저(bulldozer) 서비스 기획안과 깃허브 레포지토리 링크입니다!",
-    "views": 140
-  },
-  {
-    "title": "[셋싹이들] 청각 장애인을 위한 실시간 대화 및 환경 소리 비서 어플",
-    "views": 99
-  },
-  {
-    "title": "[서한팀] 서울 한 걸음",
-    "views": 82
-  },
-  {
-    "title": "[세계확장] 칭구야",
-    "views": 107
-  },
-  {
-    "title": "[1등은 우리팀] SafeVoice",
-    "views": 134
-  },
-  {
-    "title": "[메추라기] AI가 만드는 모두의 식탁: 배리어프리 푸드 큐레이션 서비스 '메추라기'",
-    "views": 103
-  },
-  {
-    "title": "[부천대화이팅]_StackLoad AI 개발자 커리어 어시스턴트",
-    "views": 157
-  },
-  {
-    "title": "[에이싹] 모아캐스트(Moacast) — 한 귀로 모으는 세상 이야기",
-    "views": 137
-  },
-  {
-    "title": "[뭘했음청년] 링크룸(LinkRoom)",
-    "views": 127
-  },
-  {
-    "title": "[F4] 보증금 레이더",
-    "views": 305
-  },
-  {
-    "title": "[초록새싹단] 당 수치 확인 건강 관리 애플리케이션",
-    "views": 118
-  },
-  {
-    "title": "[PromptStudio] 프롬프트 스튜디오",
-    "views": 142
-  },
-  {
-    "title": "2025 새싹 해커톤 AI 서비스 기획서 배통통팀",
-    "views": 164
-  },
-  {
-    "title": "[사과조리법] 다시봄",
-    "views": 89
-  },
-  {
-    "title": "팀 산채비빔밥 (프로젝트 서울 도슨트)",
-    "views": 283
-  },
-  {
-    "title": "✨속닥: AI와 함께 만드는 새로운 수업 참여의 흐름 ✨[제발돌아가조]",
-    "views": 118
-  },
-  {
-    "title": "[링커스] Linkus Legal – 청년 계약서 법률 리스크 분석 서비스",
-    "views": 109
-  },
-  {
-    "title": "온기 - \"먼저 찾아와 마음을 채우는 따뜻한 목소리\"",
-    "views": 121
-  },
-  {
     "title": "[소비게이터] Olla",
-    "views": 297
+    "views": 301
   },
   {
-    "title": "[알록달록] NewsSense",
-    "views": 241
-  },
-  {
-    "title": "청년정책 올인원",
-    "views": 317
-  },
-  {
-    "title": "AI 학습 파트너",
-    "views": 144
-  },
-  {
-    "title": "[나노겐] 약관을 읽어주세요",
-    "views": 99
-  },
-  {
-    "title": "Compiler_Editors : Edit-Click(모바일 편집기)",
-    "views": 112
-  },
-  {
-    "title": "[OnTime] OnTime",
-    "views": 158
-  },
-  {
-    "title": "[앤드하임(Ndheim)] Re:mind",
-    "views": 214
-  },
-  {
-    "title": "[FestMoment] Festival Moment",
-    "views": 282
-  },
-  {
-    "title": "LGTM - uniON",
-    "views": 189
-  },
-  {
-    "title": "Aiion",
-    "views": 90
-  },
-  {
-    "title": "CODE:ME_기획서",
-    "views": 209
-  },
-  {
-    "title": "[리코코] Enerlog",
-    "views": 89
-  },
-  {
-    "title": "케어 내비(Care_Navi) 예선 자료 제출",
-    "views": 74
-  },
-  {
-    "title": "[FinQ] FinQ - 정보 불평등을 없애는 청년 맞춤형 정책·금융 AI",
-    "views": 331
-  },
-  {
-    "title": "[펜타곤] GLOWFOREVER",
-    "views": 243
-  },
-  {
-    "title": "길 잃은 외쿡인 기획안, git url",
-    "views": 111
-  },
-  {
-    "title": "[IP] 타임투필 (Time to Pill)",
-    "views": 133
+    "title": "[디지몬] 영양든든🌱",
+    "views": 126
   },
   {
     "title": "[리젤리젤리] Find My Rizz (나의 리즈를 찾아서)",
-    "views": 90
+    "views": 92
   },
   {
-    "title": "[유성구 해바라기반] 숨터(soom_teo)",
-    "views": 139
+    "title": "[FairStay] FairStay",
+    "views": 97
   },
   {
-    "title": "[PixelUP] Ko-Pixel",
-    "views": 105
+    "title": "[효도르] 오늘의 안부",
+    "views": 76
   },
   {
-    "title": "[현태형준] 심봉사(心: 마음이 가는 봉사활동)",
-    "views": 132
+    "title": "FakeAD Dect AI : 허위,과대광고를 탐지하다",
+    "views": 144
   },
   {
-    "title": "[포근코드] 소프트데이: 신입 직장인의 하루를 지켜주는 AI 스트레스 케어 서비스",
-    "views": 239
-  },
-  {
-    "title": "기획서 제출합니다!",
-    "views": 115
-  },
-  {
-    "title": "[PALETTO] CLUE",
-    "views": 80
-  },
-  {
-    "title": "[팡팡특공대] 어데가노!",
-    "views": 340
-  },
-  {
-    "title": "[핸드 오프]  AI 에이전트를 활용한 공공업무 인수인계 지원 서비스",
-    "views": 128
-  },
-  {
-    "title": "원테이트_해커톤 서비스 기획서 제출",
-    "views": 94
-  },
-  {
-    "title": "\"허리 펴 이 녀석아!\" 화난 할머니가 코칭해주는 AI 홈트 서비스",
-    "views": 561
-  },
-  {
-    "title": "온라인 금융사기 예방 AI 어시스턴트 Safesurf",
-    "views": 111
-  },
-  {
-    "title": "[타임브릿지]",
-    "views": 118
+    "title": "HoneyPot(AI Info)",
+    "views": 106
   },
   {
     "title": "[9'rown]치톤피드",
-    "views": 738
+    "views": 746
   },
   {
     "title": "건강한 학습을 위한 로봇 파트너,  “FocusMate”",
     "views": 111
   },
   {
-    "title": "[제로부터 시작하는 돌봄생활] 여느날",
-    "views": 253
+    "title": "[펜타곤] GLOWFOREVER",
+    "views": 246
   },
   {
-    "title": "[See:Drvie] 센서융합·AI 기반 자율형 사고 인지·판단 솔루션",
-    "views": 122
-  },
-  {
-    "title": "LIVELY: AI 기반 통합 생활서비스 플랫폼",
-    "views": 117
-  },
-  {
-    "title": "SeoulLog",
-    "views": 138
-  },
-  {
-    "title": "[버디랩] 아이의 발음을 듣고 의미를 이해해 실시간으로 상호작용하는 AI 언어 에이전트, 링버디",
-    "views": 239
-  },
-  {
-    "title": "[이코에코(Eco²)] 이코에코(Eco²)",
-    "views": 136
-  },
-  {
-    "title": "[러닝메이트] 장학런: 멈칫하는 청춘은 없다! 너의 미래, 장학금으로 풀매수",
-    "views": 225
-  },
-  {
-    "title": "FakeAD Dect AI : 허위,과대광고를 탐지하다",
-    "views": 141
-  },
-  {
-    "title": "[바로킥] 서명 전 30초, 어르신 계약을 지키는 AI 앱",
-    "views": 100
-  },
-  {
-    "title": "[시냅스] FinFit - AI 금융 문해력 향상 서비스",
-    "views": 305
-  },
-  {
-    "title": "[서빙고] AI싹쓰리",
-    "views": 101
-  },
-  {
-    "title": "굿코딩 신청서",
-    "views": 152
-  },
-  {
-    "title": "[VIBE] 시간 적응형 오디오-비주얼 하이브리드 콘텐츠 플랫폼, PLIT",
-    "views": 240
-  },
-  {
-    "title": "[LINX] 화장실 GO",
-    "views": 154
-  },
-  {
-    "title": "세이프콜 (Safe-Call): 보이스피싱 피해방지를 위한 통화 중 실시간 AI 조언 및 안심케어 서비스",
-    "views": 261
-  },
-  {
-    "title": "[BALBUDOONG] intersection",
-    "views": 196
-  },
-  {
-    "title": "HoneyPot(AI Info)",
-    "views": 105
-  },
-  {
-    "title": "GemOphiaLab _ 퐁당",
-    "views": 118
-  },
-  {
-    "title": "[노인과 해커톤] Fit your Prompt, Prom:Fit",
-    "views": 128
-  },
-  {
-    "title": "Eroom (AI 기반 취업 로드맵 어플리케이션) \u0000",
-    "views": 189
-  },
-  {
-    "title": "[효도르] 오늘의 안부",
-    "views": 74
-  },
-  {
-    "title": "[ 구황작물 ] 여기대요",
-    "views": 96
-  },
-  {
-    "title": "[HAEMA] 해마",
-    "views": 120
-  },
-  {
-    "title": "팀명:",
-    "views": 215
-  },
-  {
-    "title": "[Whisperers] EarSEO - 서울시 관광객을 위한 AI기반 관광 도슨트 서비스",
-    "views": 129
-  },
-  {
-    "title": "[문래개발촌] 서로의 지혜를 마주 보는 곳 : 마주.ai",
-    "views": 123
-  },
-  {
-    "title": "[견디션] 함께찾개",
-    "views": 105
-  },
-  {
-    "title": "[TryAngle]예선 기획서",
-    "views": 102
-  },
-  {
-    "title": "[AIFL(에이플)팀] AI 발표 분석 협업 플랫폼",
+    "title": "Compiler_Editors : Edit-Click(모바일 편집기)",
     "views": 113
   },
   {
-    "title": "[GoD] 딥러닝 기반 실시간 Multi-Camera 위험 상황 판단 및 추적 대응 관제 시스템",
-    "views": 77
+    "title": "길 잃은 외쿡인 기획안, git url",
+    "views": 112
   },
   {
-    "title": "[당겨스] SFITZ",
-    "views": 122
+    "title": "온라인 금융사기 예방 AI 어시스턴트 Safesurf",
+    "views": 113
   },
   {
-    "title": "[동글둥글] Cat-ching: 기업 분석 확장 프로그램",
-    "views": 171
-  },
-  {
-    "title": "[eum] e:um",
-    "views": 130
-  },
-  {
-    "title": "🌱NEST - 🙋시민 참여형 곤충 탐지 및 위험 정보 제공 플랫폼 🦋",
-    "views": 396
-  },
-  {
-    "title": "기획서 제출_슈팅스타",
-    "views": 150
-  },
-  {
-    "title": "공무원 할 일 추천시스템, 온보드 버디를 소개합니다!",
-    "views": 93
-  },
-  {
-    "title": "[CodePlay] 잡잘하다 (Job-Jal-Hada)",
-    "views": 131
-  },
-  {
-    "title": "[KBS] 픽셀푸드",
-    "views": 94
-  },
-  {
-    "title": "[THIRTYOZ] Pin Seoul",
-    "views": 116
-  },
-  {
-    "title": "[내일은 나와] 내일은 나와(Tomorrow, with me)",
-    "views": 140
-  },
-  {
-    "title": "[소셜라이프가드] SNS 기반 자살위험 신호 AI 분석·모니터링 서비스 – 도와줄게",
-    "views": 158
-  },
-  {
-    "title": "Muse_YOU",
-    "views": 125
-  },
-  {
-    "title": "[슬로우즈] 리핏 (Re ; Fit): AI 기반 개인화 코디 추천과 패션 커뮤니티가 결합된 스타일링 플랫폼",
-    "views": 129
-  },
-  {
-    "title": "[애용] 가랏! in텔로몬",
-    "views": 242
-  },
-  {
-    "title": "[장수거북] 든든이",
-    "views": 172
-  },
-  {
-    "title": "[FairStay] FairStay",
-    "views": 96
-  },
-  {
-    "title": "[Team SEOMSE] seomse AI",
-    "views": 100
-  },
-  {
-    "title": "[Aipex] GLAUX 기획서",
-    "views": 119
-  },
-  {
-    "title": "[WeBridge] 복지이음: LLM-RAG 기반 개인 맞춤형 음성 복지 서비스",
-    "views": 107
-  },
-  {
-    "title": "IFRS S1·S2 기준에 맞춘 지속가능경영보고서를 자동 생성하는 AI 서비스",
-    "views": 101
-  },
-  {
-    "title": "[APP] 카페인핏(카핏)",
-    "views": 99
-  },
-  {
-    "title": "SOFE(소프) - 소프, 음악으로 기록하는 나의 하루 / Story Of Feeling Everyday",
-    "views": 140
-  },
-  {
-    "title": "[FORIN SEOUL]  외국인 관광객을 위한 다국어 지원 서울 관광 통합 서비스",
-    "views": 242
-  },
-  {
-    "title": "[QuadraKill] Alparka",
-    "views": 134
-  },
-  {
-    "title": "[케어링크] 실버서포트 (SilverSupport)",
-    "views": 99
-  },
-  {
-    "title": "[채용사기가멈추지않는탓일까..?ㅜ.ㅜ] 고해성사",
-    "views": 259
-  },
-  {
-    "title": "[홈스윗홈] 진짜물가",
-    "views": 366
-  },
-  {
-    "title": "[Bougonia] Comentor",
-    "views": 180
+    "title": "[애햄춘복울멍이] 간편 약물 관리 서비스 PillMate(필메이트)",
+    "views": 306
   },
   {
     "title": "[Chromify] 실시간 온디바이스 AI 사용자 개인맞춤 색각 보정앱",
     "views": 103
   },
   {
-    "title": "[디지몬] 영양든든🌱",
-    "views": 125
-  },
-  {
-    "title": "팀404found 대회 제출",
-    "views": 232
-  },
-  {
-    "title": "[404 NOT FOUND LAB] 마음의 책장 - 학대 피해 아동을 위한 AI 맞춤형 치유 동화 생성 플랫",
-    "views": 93
-  },
-  {
-    "title": "[200OK] 수어·표정·제스처를 포함한 실시간 AI 기반 비언어 커뮤니케이션 플랫폼 - CueCode",
-    "views": 929
-  },
-  {
-    "title": "[포시옹] Blurr",
-    "views": 133
-  },
-  {
-    "title": "[NADA] nada",
-    "views": 287
-  },
-  {
-    "title": "[Blue Donut Lab] 늘봄케어(Neulbom Care)",
-    "views": 205
-  },
-  {
-    "title": "[팀명] 꼬깔콘",
-    "views": 192
-  },
-  {
-    "title": "[패기넘치는 ai들] 워크인서울(Walk-in Seoul)",
-    "views": 119
-  },
-  {
     "title": "[싹싹감자]싹싹파일",
-    "views": 101
+    "views": 103
   },
   {
-    "title": "2025 새싹 해커톤 팀 유틸리티 기획서",
-    "views": 116
+    "title": "[핸드 오프]  AI 에이전트를 활용한 공공업무 인수인계 지원 서비스",
+    "views": 129
   },
   {
-    "title": "[트레비앙] 갈래말래",
-    "views": 250
+    "title": "[Aetheria] AI 기반 사용자 맞춤형 러닝 경로 아트 생성 웹 서비스",
+    "views": 294
   },
   {
-    "title": "🌸복잡한 대중교통, 어르신을 대신해 읽어주는 서비스 — 길봄",
-    "views": 164
+    "title": "[리코코] Enerlog",
+    "views": 90
   },
   {
-    "title": "[남궁도철]Save Bridge",
-    "views": 116
+    "title": "AI 케어콜 기반 올인원 시니어 건강관리 서비스 “메디케어콜”",
+    "views": 113
   },
   {
-    "title": "[usome_market] storeupdown",
-    "views": 86
-  },
-  {
-    "title": "AgentQuest 기획서",
-    "views": 131
-  },
-  {
-    "title": "AI 와 함께 만드는 새로운 수업 : AI꾸러기 수업",
-    "views": 298
-  },
-  {
-    "title": "COGNIFY",
-    "views": 100
-  },
-  {
-    "title": "[펫뷸런스] 펫뷸런스",
-    "views": 276
+    "title": "[메추라기] AI가 만드는 모두의 식탁: 배리어프리 푸드 큐레이션 서비스 '메추라기'",
+    "views": 104
   },
   {
     "title": "[CIRCUS MAXIMUS] Konple",
-    "views": 79
+    "views": 84
+  },
+  {
+    "title": "[강동에번쩍] 밥스캔 - AI 메뉴판 상세 번역 및 맞춤 추천",
+    "views": 136
+  },
+  {
+    "title": "[200OK] 수어·표정·제스처를 포함한 실시간 AI 기반 비언어 커뮤니케이션 플랫폼 - CueCode",
+    "views": 935
+  },
+  {
+    "title": "[커넥터] 커리어브릿지",
+    "views": 125
+  },
+  {
+    "title": "SeoulLog",
+    "views": 138
+  },
+  {
+    "title": "[IP] 타임투필 (Time to Pill)",
+    "views": 133
+  },
+  {
+    "title": "[포시옹] Blurr",
+    "views": 135
+  },
+  {
+    "title": "[세계확장] 칭구야",
+    "views": 107
+  },
+  {
+    "title": "[에스파드] Pree",
+    "views": 147
+  },
+  {
+    "title": "[네개의-두뇌] 복지 나침반(서울시 AI 복지 매칭 서비스)",
+    "views": 119
+  },
+  {
+    "title": "[해적단]IssueTalk(이슈톡)",
+    "views": 215
+  },
+  {
+    "title": "[유성구 해바라기반] 숨터(soom_teo)",
+    "views": 143
+  },
+  {
+    "title": "[Blue Donut Lab] 늘봄케어(Neulbom Care)",
+    "views": 208
+  },
+  {
+    "title": "[ITCO] 장봄",
+    "views": 136
+  },
+  {
+    "title": "[OnTime] OnTime",
+    "views": 162
+  },
+  {
+    "title": "[알록달록] NewsSense",
+    "views": 252
+  },
+  {
+    "title": "2025 새싹 해커톤 AI 서비스 기획서 배통통팀",
+    "views": 165
+  },
+  {
+    "title": "[TryAngle]예선 기획서",
+    "views": 107
+  },
+  {
+    "title": "[부천대화이팅]_StackLoad AI 개발자 커리어 어시스턴트",
+    "views": 158
+  },
+  {
+    "title": "[홈스윗홈] 진짜물가",
+    "views": 369
+  },
+  {
+    "title": "[수상한디] 서울 집사 AI:  서울 청년 및 1인 가구를 위한 AI 주거 계약 길잡이",
+    "views": 123
+  },
+  {
+    "title": "[IIS] EVB : V2X 시스템을 활용한 AI 자율주행 시스템 기반 EV 무인 충전 로봇 서비스",
+    "views": 88
+  },
+  {
+    "title": "[현태형준] 심봉사(心: 마음이 가는 봉사활동)",
+    "views": 133
+  },
+  {
+    "title": "금융 교육 AI 서비스 \"키득\" 기획서 제출합니다.",
+    "views": 143
+  },
+  {
+    "title": "[F4] 보증금 레이더",
+    "views": 311
+  },
+  {
+    "title": "✨속닥: AI와 함께 만드는 새로운 수업 참여의 흐름 ✨[제발돌아가조]",
+    "views": 118
+  },
+  {
+    "title": "[PixelUP] Ko-Pixel",
+    "views": 107
+  },
+  {
+    "title": "[베트맨] bat",
+    "views": 110
+  },
+  {
+    "title": "[스드메의 문단속] Plan A(플랜A)",
+    "views": 537
+  },
+  {
+    "title": "[PALETTO] CLUE",
+    "views": 82
+  },
+  {
+    "title": "[eum] e:um",
+    "views": 131
+  },
+  {
+    "title": "[VLAssom] 피지컬 AI 로봇 도우미",
+    "views": 365
+  },
+  {
+    "title": "[AIQ] Quest of Seoul / AI 도슨트와 함께 떠나는 서울  여행",
+    "views": 414
+  },
+  {
+    "title": "팀명:",
+    "views": 219
+  },
+  {
+    "title": "[싸우지말자] 모야(MOYA)",
+    "views": 333
+  },
+  {
+    "title": "케어 내비(Care_Navi) 예선 자료 제출",
+    "views": 75
+  },
+  {
+    "title": "[서한팀] 서울 한 걸음",
+    "views": 86
+  },
+  {
+    "title": "[부부단] 집덕 AI청약도우미",
+    "views": 445
   },
   {
     "title": "CookPT - 사용자 맞춤 레시피 추천 앱",
     "views": 136
   },
   {
+    "title": "팀404found 대회 제출",
+    "views": 234
+  },
+  {
+    "title": "[PrePair] AI 기반 맞춤형 면접 코치 플랫폼",
+    "views": 221
+  },
+  {
+    "title": "AI 학습 파트너",
+    "views": 146
+  },
+  {
+    "title": "\"허리 펴 이 녀석아!\" 화난 할머니가 코칭해주는 AI 홈트 서비스",
+    "views": 570
+  },
+  {
+    "title": "[동글둥글] Cat-ching: 기업 분석 확장 프로그램",
+    "views": 184
+  },
+  {
+    "title": "[초록새싹단] 당 수치 확인 건강 관리 애플리케이션",
+    "views": 122
+  },
+  {
+    "title": "[Team SEOMSE] seomse AI",
+    "views": 101
+  },
+  {
+    "title": "[KBS] 픽셀푸드",
+    "views": 95
+  },
+  {
+    "title": "[패기넘치는 ai들] 워크인서울(Walk-in Seoul)",
+    "views": 124
+  },
+  {
+    "title": "[양박신사] KEEPIT(키핏)",
+    "views": 231
+  },
+  {
+    "title": "[Whisperers] EarSEO - 서울시 관광객을 위한 AI기반 관광 도슨트 서비스",
+    "views": 131
+  },
+  {
+    "title": "[THIRTYOZ] Pin Seoul",
+    "views": 119
+  },
+  {
+    "title": "[CodePlay] 잡잘하다 (Job-Jal-Hada)",
+    "views": 135
+  },
+  {
+    "title": "[4팀] RAG·LLM 기반 읽기 난이도 조절 뉴스 서비스",
+    "views": 120
+  },
+  {
+    "title": "[견디션] 함께찾개",
+    "views": 108
+  },
+  {
+    "title": "[팀명] 꼬깔콘",
+    "views": 196
+  },
+  {
+    "title": "공무원 할 일 추천시스템, 온보드 버디를 소개합니다!",
+    "views": 97
+  },
+  {
+    "title": "[시냅스] FinFit - AI 금융 문해력 향상 서비스",
+    "views": 307
+  },
+  {
+    "title": "[백야] 영케어러(가족돌봄청년)를 발굴하고 기관과 연결하는 AI 챗봇 서비스",
+    "views": 95
+  },
+  {
+    "title": "[애용] 가랏! in텔로몬",
+    "views": 251
+  },
+  {
+    "title": "Eroom (AI 기반 취업 로드맵 어플리케이션) \u0000",
+    "views": 193
+  },
+  {
+    "title": "세이프콜 (Safe-Call): 보이스피싱 피해방지를 위한 통화 중 실시간 AI 조언 및 안심케어 서비스",
+    "views": 269
+  },
+  {
+    "title": "팀 불도저(bulldozer) 서비스 기획안과 깃허브 레포지토리 링크입니다!",
+    "views": 142
+  },
+  {
+    "title": "[바로킥] 서명 전 30초, 어르신 계약을 지키는 AI 앱",
+    "views": 102
+  },
+  {
+    "title": "🌸복잡한 대중교통, 어르신을 대신해 읽어주는 서비스 — 길봄",
+    "views": 165
+  },
+  {
+    "title": "[404 NOT FOUND LAB] 마음의 책장 - 학대 피해 아동을 위한 AI 맞춤형 치유 동화 생성 플랫",
+    "views": 95
+  },
+  {
+    "title": "[러닝메이트] 장학런: 멈칫하는 청춘은 없다! 너의 미래, 장학금으로 풀매수",
+    "views": 229
+  },
+  {
+    "title": "청년정책 올인원",
+    "views": 324
+  },
+  {
+    "title": "[나루] AI 기반 실시간 민원 상담 서비스",
+    "views": 101
+  },
+  {
+    "title": "팀 산채비빔밥 (프로젝트 서울 도슨트)",
+    "views": 286
+  },
+  {
+    "title": "[세미콜론] 공공이",
+    "views": 145
+  },
+  {
+    "title": "🌱NEST - 🙋시민 참여형 곤충 탐지 및 위험 정보 제공 플랫폼 🦋",
+    "views": 397
+  },
+  {
+    "title": "[트레비앙] 갈래말래",
+    "views": 252
+  },
+  {
+    "title": "[말모 팀] 애착유형 기반 AI 연애 고민 상담 '말모'",
+    "views": 171
+  },
+  {
     "title": "[똥강아지] 정보 사각지대를 해소하는 자연어 기반 자율주행 의료 지원 로봇 Medi-Buddy",
-    "views": 443
+    "views": 447
+  },
+  {
+    "title": "[VIBE] 시간 적응형 오디오-비주얼 하이브리드 콘텐츠 플랫폼, PLIT",
+    "views": 243
+  },
+  {
+    "title": "[링커스] Linkus Legal – 청년 계약서 법률 리스크 분석 서비스",
+    "views": 109
+  },
+  {
+    "title": "팀_온기 기획서 제출합니다.",
+    "views": 166
+  },
+  {
+    "title": "[뭘했음청년] 링크룸(LinkRoom)",
+    "views": 134
+  },
+  {
+    "title": "[포근코드] 소프트데이: 신입 직장인의 하루를 지켜주는 AI 스트레스 케어 서비스",
+    "views": 245
+  },
+  {
+    "title": "[셋싹이들] 청각 장애인을 위한 실시간 대화 및 환경 소리 비서 어플",
+    "views": 100
+  },
+  {
+    "title": "[ 구황작물 ] 여기대요",
+    "views": 97
+  },
+  {
+    "title": "다문화 도우미",
+    "views": 136
+  },
+  {
+    "title": "[이코에코(Eco²)] 이코에코(Eco²)",
+    "views": 144
+  },
+  {
+    "title": "[Bougonia] Comentor",
+    "views": 184
+  },
+  {
+    "title": "[FinQ] FinQ - 정보 불평등을 없애는 청년 맞춤형 정책·금융 AI",
+    "views": 333
+  },
+  {
+    "title": "[남궁도철]Save Bridge",
+    "views": 120
+  },
+  {
+    "title": "[APP] 카페인핏(카핏)",
+    "views": 101
+  },
+  {
+    "title": "[슬로우즈] 리핏 (Re ; Fit): AI 기반 개인화 코디 추천과 패션 커뮤니티가 결합된 스타일링 플랫폼",
+    "views": 133
+  },
+  {
+    "title": "[나노겐] 약관을 읽어주세요",
+    "views": 101
+  },
+  {
+    "title": "COGNIFY",
+    "views": 103
+  },
+  {
+    "title": "원테이트_해커톤 서비스 기획서 제출",
+    "views": 97
+  },
+  {
+    "title": "[LINX] 화장실 GO",
+    "views": 156
+  },
+  {
+    "title": "[HAEMA] 해마",
+    "views": 124
+  },
+  {
+    "title": "[팡팡특공대] 어데가노!",
+    "views": 346
+  },
+  {
+    "title": "[BALBUDOONG] intersection",
+    "views": 205
+  },
+  {
+    "title": "[타임브릿지]",
+    "views": 120
+  },
+  {
+    "title": "[FestMoment] Festival Moment",
+    "views": 288
+  },
+  {
+    "title": "Muse_YOU",
+    "views": 133
+  },
+  {
+    "title": "[버디랩] 아이의 발음을 듣고 의미를 이해해 실시간으로 상호작용하는 AI 언어 에이전트, 링버디",
+    "views": 240
+  },
+  {
+    "title": "[시루와 방실이] 드림라이트",
+    "views": 96
+  },
+  {
+    "title": "[SBAI] 통계 검색 챗봇, 이지스탯 Q",
+    "views": 96
+  },
+  {
+    "title": "[채용사기가멈추지않는탓일까..?ㅜ.ㅜ] 고해성사",
+    "views": 271
+  },
+  {
+    "title": "[당겨스] SFITZ",
+    "views": 126
+  },
+  {
+    "title": "[동근이하은] MemoIt",
+    "views": 68
+  },
+  {
+    "title": "[제로부터 시작하는 돌봄생활] 여느날",
+    "views": 262
+  },
+  {
+    "title": "[1등은 우리팀] SafeVoice",
+    "views": 137
+  },
+  {
+    "title": "SOFE(소프) - 소프, 음악으로 기록하는 나의 하루 / Story Of Feeling Everyday",
+    "views": 144
+  },
+  {
+    "title": "[Aipex] GLAUX 기획서",
+    "views": 125
+  },
+  {
+    "title": "[깜자와꽁주] 피싱 세이프 AI",
+    "views": 93
+  },
+  {
+    "title": "[대 선 린] LINKA",
+    "views": 208
+  },
+  {
+    "title": "[See:Drvie] 센서융합·AI 기반 자율형 사고 인지·판단 솔루션",
+    "views": 124
+  },
+  {
+    "title": "[FORIN SEOUL]  외국인 관광객을 위한 다국어 지원 서울 관광 통합 서비스",
+    "views": 246
+  },
+  {
+    "title": "[AIFL(에이플)팀] AI 발표 분석 협업 플랫폼",
+    "views": 116
+  },
+  {
+    "title": "[밤티] ONION 기획서",
+    "views": 254
+  },
+  {
+    "title": "Aiion",
+    "views": 93
+  },
+  {
+    "title": "[AIFIXR] 팀 기획안 및 Githhub Repository 링크 제출합니다.",
+    "views": 72
+  },
+  {
+    "title": "[앤드하임(Ndheim)] Re:mind",
+    "views": 219
+  },
+  {
+    "title": "[노인과 해커톤] Fit your Prompt, Prom:Fit",
+    "views": 130
+  },
+  {
+    "title": "[숲 (For:Rest)] 홀씨: 고립·은둔 청년과 함께하는 가족을 위한 AI 서비스",
+    "views": 256
+  },
+  {
+    "title": "[장수거북] 든든이",
+    "views": 175
+  },
+  {
+    "title": "[NADA] nada",
+    "views": 292
+  },
+  {
+    "title": "[PromptStudio] 프롬프트 스튜디오",
+    "views": 144
+  },
+  {
+    "title": "LIVELY: AI 기반 통합 생활서비스 플랫폼",
+    "views": 119
+  },
+  {
+    "title": "굿코딩 신청서",
+    "views": 156
+  },
+  {
+    "title": "CODE:ME_기획서",
+    "views": 211
+  },
+  {
+    "title": "IFRS S1·S2 기준에 맞춘 지속가능경영보고서를 자동 생성하는 AI 서비스",
+    "views": 102
+  },
+  {
+    "title": "[EUME] 이음이 - 서울시의 고립은둔청년을 위한 정서 돌봄 AI 서비스",
+    "views": 275
+  },
+  {
+    "title": "GemOphiaLab _ 퐁당",
+    "views": 119
+  },
+  {
+    "title": "[소셜라이프가드] SNS 기반 자살위험 신호 AI 분석·모니터링 서비스 – 도와줄게",
+    "views": 158
+  },
+  {
+    "title": "LGTM - uniON",
+    "views": 191
+  },
+  {
+    "title": "온기 - \"먼저 찾아와 마음을 채우는 따뜻한 목소리\"",
+    "views": 125
+  },
+  {
+    "title": "[usome_market] storeupdown",
+    "views": 88
+  },
+  {
+    "title": "[RAUM] RAUM",
+    "views": 86
+  },
+  {
+    "title": "2025 새싹 해커톤 팀 유틸리티 기획서",
+    "views": 118
+  },
+  {
+    "title": "팀 고등어향 아기고양이 예선작 제출합니다.",
+    "views": 209
+  },
+  {
+    "title": "기획서 제출합니다!",
+    "views": 118
+  },
+  {
+    "title": "[내일은 나와] 내일은 나와(Tomorrow, with me)",
+    "views": 141
+  },
+  {
+    "title": "[에이싹] 모아캐스트(Moacast) — 한 귀로 모으는 세상 이야기",
+    "views": 141
+  },
+  {
+    "title": "[케어링크] 실버서포트 (SilverSupport)",
+    "views": 102
+  },
+  {
+    "title": "[Veritas] Veritas AI",
+    "views": 89
+  },
+  {
+    "title": "[식스센스] 다시잡",
+    "views": 105
+  },
+  {
+    "title": "[기획서] 트립쏙서울",
+    "views": 114
+  },
+  {
+    "title": "[QuadraKill] Alparka",
+    "views": 141
+  },
+  {
+    "title": "기획서 제출_슈팅스타",
+    "views": 153
   }
 ]
